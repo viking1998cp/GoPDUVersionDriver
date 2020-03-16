@@ -1,0 +1,183 @@
+<resources>
+    <string name="app_name">GoPDU</string>
+    <string name="toast_msg_no_support">Thiết bị không hỗ trợ phần mềm</string>
+    <string name="toast_msg_setup_service_google">Dịch vụ Google play đã được cài đặt</string>
+    <string name="dialog_thongbao">Thông báo</string>
+    <string name="dialog_title_close">Đóng</string>
+    <string name="inputPhoneRegister">Nhập số điện thoại đã đăng kí của bạn</string>
+    <string name="emptyNumberPhone">Không được để trống số điện thoại</string>
+    <string name="contract">Trong Điều Khoản Sử Dụng Dịch Vụ này (“ĐKSDDV”), trừ khi ngữ cảnh yêu cầu khác đi, các thuật ngữ dưới đây sẽ có nghĩa như sau:
+
+“Tài Khoản” có nghĩa là một tài khoản trực tuyến mà KHÁCH HÀNG mở trên một nền tảng công nghệ của GRAB, để qua đó ghi lại và theo dõi Phí Sử Dụng Dịch Vụ;
+
+“Công Cụ Cho Phép và Tính Phí” có nghĩa là một công cụ công nghệ mà GRAB có thể cung cấp cho KHÁCH HÀNG vì mục đích cung cấp Dịch Vụ Ứng Dụng và vận hành Tài Khoản dưới hình thức một mã điện tử hoặc cuộc gọi kích hoạt qua điện thoại, hoặc một hình thức khác do GRAB quyết định tại từng thời điểm;
+
+“Dịch Vụ Ứng Dụng” có nghĩa là dịch vụ đặt và điều phối xe nhằm hỗ trợ Nhân Viên KHÁCH HÀNG sử dụng Dịch Vụ Vận Chuyển;
+
+“Ngày Làm Việc” có nghĩa là bất kỳ ngày nào không phải ngày thứ bảy, chủ nhật hoặc ngày mà các ngân hàng thương mại tại Việt Nam được quyền hoặc buộc phải đóng cửa phục vụ theo yêu cầu của pháp luật;
+
+“KHÁCH HÀNG” có nghĩa là các khách hàng ký kết Hợp Đồng Grab for Work với GRAB hoặc các thỏa thuận tương tự liên quan đến giao dịch được quy định trong ĐKSDDV này;
+
+“Nhân Viên KHÁCH HÀNG” có nghĩa là người lao động và cộng tác viên của KHÁCH HÀNG hoặc các cá nhân do KHÁCH HÀNG chỉ định và thông báo cho GRAB phù hợp với ĐKSDDV này;
+
+“Thông Tin Bảo Mật” có nghĩa là bất kỳ Dữ Liệu Cá Nhân nào như được định nghĩa trong ĐKSDDV này và các thông tin được coi là bảo mật hoặc độc quyền (ngoài Dữ Liệu Cá Nhân) được tiết lộ bởi Bên Tiết Lộ cho Bên Nhận Thông Tin, bao gồm tất cả các thông tin về Nhân Viên KHÁCH HÀNG (bao gồm các giao diện truy cập, chi tiết truy cập, số lượng, thời gian, thời lượng sử dụng thiết bị hoặc truy cập Ứng Dụng Grab), các chi tiết cụ thể (bao gồm Số Nhận Dạng Thiết Bị Di Động Quốc Tế (IMEI), thông tin liên lạc, số điện thoại, cấu hình mạng, thông tin vị trí, tên người nhận hóa đơn, giá cước, lịch sử tín dụng và các chi tiết khác liên quan đến việc thanh toán), các thông tin về mặt thương mại, kỹ thuật hoặc tài chính liên quan đến ĐKSDDV này, Bên Tiết Lộ hoặc bất kỳ công ty liên kết nào của Bên Tiết Lộ bao gồm tất cả các bí mật kinh doanh, bí quyết, bằng sáng chế, nghiên cứu, phát triển hoặc thông tin kỹ thuật, các sản phẩm hoặc thông tin có tính chất bảo mật và độc quyền, Quyền Sở Hữu Trí Tuệ, các kế hoạch kinh doanh, hoạt động hoặc hệ thống kinh doanh, tình hình tài chính và kinh doanh, thông tin chi tiết về khách hàng, nhà cung cấp, bên vay nợ hoặc chủ nợ, thông tin liên quan đến các quản lý, giám đốc hoặc nhân viên của Bên Tiết Lộ hoặc của bất kỳ công ty liên kết nào của Bên Tiết Lộ, các thông tin tiếp thị, ấn phẩm, tỉ giá và bảng tỉ giá, các hợp đồng, tất cả các loại thông tin bảo mật không xét đến hình thức, định dạng hoặc phương tiện, cho dù là dưới dạng đọc được bằng máy hay bằng mắt thường, bao gồm dưới hình thức văn bản, lời nói hoặc hình thức hữu hình, và bao gồm cả các thông tin được trao đổi hoặc có được thông qua các cuộc hội họp, văn kiện, thư từ trao đổi hoặc việc nhận xét, phân tích các vật thể hữu hình;
+
+“Bên Tiết Lộ” có nghĩa là bên mà từ đó Thông Tin Bảo Mật được tạo ra và tiết lộ cho Bên Nhận Thông Tin;
+
+“Bất Khả Kháng” có nghĩa là bất kỳ nguyên nhân nào nằm ngoài tầm kiểm soát hợp lý của một bên, ảnh hưởng đến hoạt động và khả năng của bên chịu ảnh hưởng trong việc thực hiện các nghĩa vụ của mình theo ĐKSDDV này, bao gồm nhưng không giới hạn đối với các sự kiện thiên tai, bạo động hoặc bất ổn dân sự, chiến tranh hoặc xung đột vũ trang, tình huống khẩn cấp mức độ quốc gia hoặc địa phương, hành động hoặc không hành động của chính phủ, xung đột lao động các loại (không liên quan đến các nhân viên của bên chịu ảnh hưởng), hỏa hoạn, lũ lụt, sét đánh, cháy nổ, sụt lún, khí hậu khắc nghiệt và các kiện cáo hoặc cản trở của cá nhân hay tổ chức mà nằm ngoài tầm kiểm soát hợp lý của bên đó; và “Bất Khả Kháng” khi được áp dụng cho GRAB liên quan đến việc cung cấp Dịch Vụ Ứng Dụng sẽ bao gồm cả khủng hoảng đường truyền internet và bất kỳ sự cố kỹ thuật ngoài kiểm soát nào mà có thể ảnh hưởng đến hệ thống kỹ thuật hỗ trợ việc vận hành thông thường của Ứng Dụng Grab;
+
+“ĐKSDDV” có nghĩa là các điều khoản và điều kiện chung và bất kỳ phụ lục nào của ĐKSDDV này và tất cả các sửa đổi, điều chỉnh, hoặc bổ sung của ĐKSDDV này bởi GRAB tại từng thời điểm;
+
+“GRAB” có nghĩa là Công Ty TNHH GrabTaxi, một công ty được thành lập theo quy định của pháp luật Việt Nam có Đăng Ký Doanh Nghiệp số 0312650437, và bất kỳ công ty liên kết nào khi được áp dụng;
+
+“Ứng Dụng Grab” có nghĩa là một phần mềm ứng dụng di động mà GRAB được quyền sử dụng, có chức năng đáp ứng nhu cầu sử dụng dịch vụ đặt xe và điều xe cho Nhân Viên KHÁCH HÀNG, dịch vụ này sau đó được chuyển cho Bên Vận Chuyển đã đăng ký và có khả năng thực hiện việc điều phối và cung cấp Dịch Vụ Vận Chuyển theo yêu cầu của Nhân Viên KHÁCH HÀNG đó;
+
+“Hợp Đồng Grab for Work” có nghĩa là một hợp đồng dịch vụ được ký kết bởi và giữa GRAB và KHÁCH HÀNG xác nhận việc ký kết thực hiện các giao dịch được quy định trong ĐKSDDV này liên quan đến Dịch Vụ Ứng Dụng và việc áp dụng ĐKSDDV này;
+
+“Grab Hub” có nghĩa là một nền tảng công nghệ (i) cung cấp các thông tin chung của Tài Khoản của KHÁCH HÀNG bao gồm lịch sử chuyến đi của Nhân Viên KHÁCH HÀNG, và (ii) cho phép KHÁCH HÀNG điều chỉnh danh sách Nhân Viên KHÁCH HÀNG tại từng thời điểm;
+
+“Quyền Sở hữu Trí tuệ” có nghĩa là tất cả các quyền sở hữu trí tuệ bao gồm nhưng không giới hạn đối với các bằng sáng chế, các quyền về sơ đồ mạch, nhãn hiệu, thương hiệu dịch vụ, tên thương nghiệp, thiết kế đã đăng ký bản quyền, quyền tác giả và các hình thức sở hữu trí tuệ khác hoặc sở hữu công nghiệp, bí quyết, phát minh, công thức, chiếm hữu bí mật, bí mật kinh doanh và Thông Tin Bảo Mật, và bất kỳ quyền hay tài sản được bảo hộ nào khác và bất kỳ giấy phép hoặc chứng nhận nào khác có liên quan theo đó, trong từng trường hợp ở bất kỳ đâu trên thế giới và cho dù đã được đăng ký hay chưa hoặc có thể đăng ký được hay không, hoặc đang trong quá trình đăng ký, và toàn bộ các quyền đó khi được gia hạn hoặc khôi phục, và tất cả các đơn đăng ký bảo hộ có liên quan đến các điều trên;
+
+“Báo Cáo Tháng” có nghĩa là một báo cáo tính phí liệt kê tổng Phí Sử Dụng Dịch Vụ do Nhân Viên KHÁCH HÀNG sử dụng đối với từng tháng dương lịch và được gửi cho KHÁCH HÀNG vào ngày đầu tiên của tháng liền sau tháng báo cáo có liên quan;
+
+“Bên” có nghĩa là KHÁCH HÀNG hoặc GRAB, và GRAB và KHÁCH HÀNG theo đây được gọi chung là “Các Bên”;
+
+“Dữ Liệu Cá Nhân” có nghĩa là thông tin cá nhân là các thông tin góp phần định danh một cá nhân cụ thể, bao gồm tên, số điện thoại, email, thông tin về số tài khoản mà cá nhân khai báo trong các giao dịch đặt xe và thanh toán chuyến đi của cá nhân trên ứng dụng Grab và những thông tin khác mà cá nhân mong muốn giữ bí mật;
+
+“Thông Báo Quyền Bảo Mật” có nghĩa là Thông Báo Quyền Bảo Mật của GRAB bằng tiếng Anh và Việt mà có thể truy cập tại trang web có địa chỉ http://grab.com/vn/privacy/, được điều chỉnh tùy từng thời điểm và trong trường hợp có sự khác biệt giữa bản tiếng Anh và tiếng Việt, bản tiếng Việt sẽ được ưu tiên áp dụng;
+
+“Xử lý” liên quan đến Dữ Liệu Cá Nhân, có nghĩa là việc thu thập, ghi chép, nắm giữ và/hoặc lưu trữ Dữ Liệu Cá Nhân và/hoặc thực hiện bất kỳ hành động hoặc chuỗi hành động nào đối với Dữ Liệu Cá Nhân, bao gồm:
+
+a. tổ chức, nhập liệu và/hoặc thay đổi Dữ Liệu Cá Nhân;
+
+b. phục hồi, tham khảo và/hoặc sử dụng Dữ Liệu Cá Nhân;
+
+c. tiết lộ Dữ Liệu Cá Nhân bằng cách truyền tin, chuyển nhượng, phát tán hoặc cung cấp bằng cách khác; hoặc
+
+d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Liệu Cá Nhân.
+
+“Phí Sử dụng Dịch vụ” có nghĩa là phí bằng Đồng Việt Nam, đã bao gồm thuế giá trị gia tăng mà KHÁCH HÀNG phải trả cho việc sử dụng các dịch vụ được quy định trong ĐKSDDV này của các Nhân Viên KHÁCH HÀNG. Phí Sử Dụng Dịch Vụ này có thể được điều chỉnh phụ thuộc vào chính sách giá cước của GRAB và Bên Vận Chuyển có liên quan khi áp dụng;
+
+“Điều Khoản Sử Dụng” có nghĩa là Điều Khoản Sử Dụng được áp dụng cho Ứng Dụng Grab bằng cả tiếng Anh và tiếng Việt được thông báo công khai trên trang web chính thức của GRAB tại địa chỉ https://www.grab.com/vn/terms/ tại từng thời điểm, trong trường hợp có sự khác biệt giữa bản tiếng Anh và tiếng Việt, bản tiếng Việt sẽ được ưu tiên áp dụng;
+
+“Dịch Vụ Vận Chuyển” có nghĩa là dịch vụ vận chuyển và/hoặc giao hàng được cung cấp bởi các bên thứ ba mà đã đăng ký là nhà cung cấp dịch vụ thông qua Ứng Dụng Grab;
+
+“Bên Vận Chuyển” có nghĩa là các bên thứ ba độc lập đã đăng ký là nhà cung cấp dịch vụ thông qua Ứng Dụng Grab theo quy định và chính sách phân chia của GRAB tùy trường hợp; và
+
+“VNĐ” có nghĩa là đồng tiền hợp pháp của Nước Cộng Hòa Xã Hội Chủ Nghĩa Việt Nam.</string>
+
+    //input infomaton user
+    <string name="login">Đăng nhập</string>
+    <string name="register">Đăng kí</string>
+
+    <string name="phoneHint">Số điện thoại</string>
+    <string name="emailHint">Email*</string>
+    <string name="dateOfBirth">Ngày sinh</string>
+    <string name="pickADate">Chọn ngày</string>
+    <string name="nameHint">Tên: </string>
+    <string name="gender">Giới tính: </string>
+    <string name="or">hoặc</string>
+    <string name="contactWhitMe">Không truy cập được liên hệ hotline 0389512898</string>
+    <string name="wellcome">Chào mừng bạn tham gia đội ngũ tài xế của chúng tôi</string>
+
+
+    <string name="licenseplatesTitle">Bạn vui lòng chụp ảnh giấy phép lái xe 2 mặt trước và sau:</string>
+    <string name="driverFaceTitle">Chụp ảnh chân dung của bạn:</string>
+    <string name="identitycardTitle">Chụp ảnh thẻ căn cước 2 mặt trước và sau:</string>
+    <string name="motorcyclepapersTitle">Chụp ảnh 2 mặt trước và sau giấy tờ xe của bạn:</string>
+    <string name="licenseplatesHint">Biển số xe</string>
+    <string name="cancel">Hủy</string>
+
+    //Camera
+    <string name="off">off</string>
+    <string name="on">on</string>
+    <string name="waitingProcess">Đang xử lý</string>
+    <string name="toast_msg_camera_disconnect">Không thể kết nối máy ảnh, vui lòng thử lại</string>
+    <string name="toast_msg_err_save_picture_please_try">Lỗi trong quá trình lưu ảnh, vui lòng chụp lại</string>
+    <string name="takePhotoAgain">Chụp lại</string>
+    <string name="save">Lưu</string>
+    <string name="patternDate">dd-MM-yyyy HH:mm:ss.SSS</string>
+    <string name="front">Trước</string>
+
+    <string name="request_imv">request_imv</string>
+    <string name="checkConnect">Vui lòng kiểm tra lại kết nối mạng</string>
+    <string name="exitsAccount">Đã tồn tại tài khoản này</string>
+
+    //Check image
+
+    <string name="next">Tiếp tục</string>
+    <string name="errorEmpty">Bạn vui lòng điền đầy đủ các thông tin</string>
+    <string name="objectDriver">Driver</string>
+    <string name="imv">imv</string>
+    <string name="string_title_upload_progressbar_">Đang tải dữ liệu vui lòng chờ trong ít phút</string>
+    <string name="string_upload_success">thanh cong</string>
+    <string name="string_upload_fail">That bai</string>
+    <string name="titleCaptureImage">Độ chính xác của hồ sơ sẽ quyết định tài khoản của bạn có được duyệt hay không!!</string>
+    <string name="preview">Quay lại</string>
+
+    //Upload image query and callback image
+    <string name="identityFront">identityfront</string>
+    <string name="identityBackSide">identitybackside</string>
+    <string name="licenseDriverFront">licensefront</string>
+    <string name="licenseDriverBackSide">licensebackside</string>
+    <string name="motorcyclepapersFront">motocyclepaperfront</string>
+    <string name="motorcyclepapersBackSide">motocyclepaperbackside</string>
+    <string name="driverFace">driverface</string>
+    <string name="acceptContract">Chấp nhận điều khoản của chúng tôi</string>
+
+    //Error image
+    <string name="errorLicenseDriver">Thiếu ảnh bằng lái xe 2 mặt trước và sau</string>
+    <string name="errorIdentityCard">Thiếu ảnh thẻ căn cước 2 mặt trước và sau</string>
+    <string name="errorMotorcycleImage">Thiếu ảnh giấy tờ xe 2 mặt trước và sau</string>
+    <string name="errorDriverFace">Thiếu ảnh chân dung</string>
+
+    //register driver query param
+    <string name="paramID">id</string>
+    <string name="paramName">name</string>
+    <string name="paramGender">gender</string>
+    <string name="paramBirthDate">birthdate</string>
+    <string name="paramLicenseplate">licenseplates</string>
+    <string name="paramImv_Driverface">imv_driverface</string>
+    <string name="paramImv_IdentityCardFront">imv_identitycard_front</string>
+    <string name="paramImv_IdentityCardBackside">imv_identitycard_backside</string>
+    <string name="paramLicense_DriverFront">imv_licensedriver_front</string>
+    <string name="paramLicense_DriverBackside">imv_licensedriver_backside</string>
+    <string name="paramMotocyclepaper_DriverFront">imv_motorcyclepapers_front</string>
+    <string name="paramMotocyclepaper_DriverBackside">imv_motorcyclepapers_backside</string>
+
+    //Ressult register
+    <string name="registerSuccess">Đăng kí thành công</string>
+    <string name="registerFaild">Đăng kí thất bại vui lòng thử lại sau</string>
+    <string name="areaCode">+84</string>
+    <string name="resultRegister">resultRegister</string>
+    <string name="notificationRegisterSuccess">Chúc mừng bạn đã đăng kì tài khoản thành công. Tài khoản của bạn sẽ được xét duyệt trong thời gian sớm nhất</string>
+    <string name="btnBackToMain">Quay lại trang chủ</string>
+    <string name="notificationRegisterFaild">Hệ thống đã xảy ra lỗi vui lòng thử lại sau</string>
+    <string name="paramNumberPhone">numberphone</string>
+    <string name="paramDriverOrCustomer">driverOrCustomer</string>
+
+
+    <string name="active">Xác nhận</string>
+    <string name="otpError">Sai mã xác thực vui lòng kiểm tra lại</string>
+    <string name="helperActivityOTP">GoPDU sẽ gửi một mã kích hoạt qua số điện thoại %1$s. Dùng mã kích hoạt vừa nhận để kích hoạt tài khoản</string>
+    <string name="timerotp">Mã kích hoạt sẽ hết hạn trong: %1$d</string>
+    <string name="send_again_otp">Yên cầu nhận lại mã</string>
+    <string name="errorOtp">Sai mã xác thực vui lòng kiểm tra lại</string>
+    <string name="emptyOtp">Không được để trống mã xác thực</string>
+    <string name="loginSuccess">Đăng nhập thành công</string>
+    <string name="title_Working">Chế độ làm việc</string>
+    <string name="title_History">Lịch sử</string>
+    <string name="title_programfile">Tài khoản</string>
+
+    //step
+
+    <string name="register_step1">REGISTER - STEP 1/6</string>
+    <string name="register_step2">REGISTER - STEP 2/6</string>
+    <string name="register_step3">REGISTER - STEP 3/6</string>
+    <string name="register_step4">REGISTER - STEP 4/6</string>
+    <string name="register_step5">REGISTER - STEP 5/6</string>
+    <string name="register_step6">REGISTER - STEP 6/6</string>
+    <string name="comfirm">Xác thực</string>
+    <string name="erroClient">Có lỗi xảy ra vui lòng kiểm tra lại</string>
+    <string name="checkLocation">Vui lòng bật GPS</string>
+</resources>

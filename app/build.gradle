@@ -1,0 +1,95 @@
+apply plugin: 'com.android.application'
+
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+    defaultConfig {
+        applicationId "gopdu.pdu.gopduversiondriver"
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    dataBinding {
+        enabled = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation group: 'commons-io', name: 'commons-io', version: '2.0.1'
+    implementation "commons-io:commons-io:+"
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.android.support:appcompat-v7:29.+'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    //Google service library
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-core:17.0.0'
+    implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-database:17.0.0'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.firebase:geofire-android:2.1.1'
+    implementation 'com.firebaseui:firebase-ui-auth:4.0.0'
+    implementation 'com.google.firebase:firebase-storage:16.1.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.github.jd-alexander:library:1.1.0'
+    implementation 'com.google.maps:google-maps-services:0.1.20'
+    implementation 'com.google.maps.android:android-maps-utils:0.5+'
+    implementation 'com.google.android.play:core:1.6.0'
+
+    //Search location
+    implementation 'com.google.maps:google-maps-services:0.1.20'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.libraries.places:places-compat:2.0.0'
+    implementation 'com.google.android.gms:play-services-places:16.1.0'
+
+
+    //Slide library
+    implementation 'com.github.smarteist:autoimageslider:1.3.2-appcompat'
+    implementation 'com.romandanylyk:pageindicatorview:1.0.3'
+    implementation 'com.github.mukeshsolanki:android-otpview-pinview:2.0.3'
+
+    //Retro fit
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    annotationProcessor 'androidx.lifecycle:lifecycle-compiler:2.0.0'
+
+    //Otpview
+    implementation 'com.poovam:pin-edittext-field:1.2.1'
+
+    //Back press fragment
+    implementation 'net.skoumal.fragmentback:fragment-back:0.2.3'
+
+    //loader
+    implementation 'com.github.jorgecastilloprz:fillableloaders:1.03@aar'
+    implementation 'com.jaredrummler:animated-svg-view:1.0.6'
+
+    //Image View Zoom
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.koushikdutta.ion:ion:2.1.6'
+
+
+    api 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.github.mohammadatif:Animatoo:master'
+}
+
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'

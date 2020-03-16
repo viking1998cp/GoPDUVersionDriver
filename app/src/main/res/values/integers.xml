@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="orientation_camera">90</integer>
+    <integer name="maxLenghtPhoneNumber">10</integer>
+
+</resources>

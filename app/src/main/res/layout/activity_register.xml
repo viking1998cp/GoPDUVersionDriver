@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <include
+                layout="@layout/content_banner_main"
+                />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                style="@style/ToolBarTheme.ToolBarStyle"
+                android:theme="@style/ToolBarTheme.ToolBarStyle"
+                app:title="@string/register_step1"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="20">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/imvLogo"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:src="@drawable/ic_logo" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="15"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding10dp">
+
+                    <include layout="@layout/content_register"
+                        android:id="@+id/iclRegister"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>

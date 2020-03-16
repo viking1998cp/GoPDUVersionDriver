@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="arraySvgSuccess">
+        <item>M183.903,0.001c101.566,0,183.902,82.336,183.902,183.902s-82.336,183.902-183.902,183.902 S0.001,285.469,0.001,183.903l0,0C-0.288,82.625,81.579,0.29,182.856,0.001C183.205,0,183.554,0,183.903,0.001z</item>
+        <item>M 285.78 133.225 L 155.168 263.837 L 82.025 191.217 L 111.805 161.96 L 155.168 204.801 L 256.001 103.968 Z</item>
+    </string-array>
+
+    <integer-array name="arrayColorSuccess">
+        <item>@color/colorGreen</item>
+        <item>@color/colorGray1</item>
+    </integer-array>
+
+    <string-array name="arraySvgFaild">
+        <item>M314.101,54.133c71.79,71.847 71.744,188.287 -0.103,260.077s-188.287,71.744 -260.077,-0.103c-71.75,-71.806 -71.75,-188.167 0,-259.974c71.381,-71.847 187.49,-72.224 259.337,-0.843C313.54,53.57 313.821,53.851 314.101,54.133z</item>
+        <item>M275.439,124.663l-59.559,59.56l59.559,59.559l-31.869,31.869l-59.559,-59.559l-59.559,59.559l-31.87,-31.869l59.56,-59.559l-59.56,-59.56l31.87,-31.869l59.559,59.559l59.559,-59.559z</item>
+    </string-array>
+
+    <integer-array name="arrayColorFaild">
+        <item>@color/colorRed</item>
+        <item>@color/colorGray1</item>
+    </integer-array>
+</resources>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background_layout_white"
+        android:layout_margin="@dimen/margin10dp"
+        android:paddingRight="@dimen/padding5dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin16dp"
+            android:gravity="center"
+            android:text="@string/wellcome"
+            android:textSize="@dimen/fontMediumSmall"
+            />
+        <LinearLayout
+
+            android:layout_marginTop="@dimen/margin10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10">
+            <TextView
+                style="@style/textRegister"
+                android:text="@string/nameHint"/>
+            <EditText
+                android:id="@+id/etName"
+                style="@style/etRegister"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10">
+            <TextView
+                style="@style/textRegister"
+                android:text="@string/dateOfBirth"/>
+            <EditText
+                android:id="@+id/etBirthDate"
+                style="@style/etRegister"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10">
+            <TextView
+                style="@style/textRegister"
+                android:text="@string/phoneHint"/>
+
+            <EditText
+                android:id="@+id/etNumberPhone"
+                style="@style/etRegister" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10">
+            <TextView
+                style="@style/textRegister"
+                android:text="@string/licenseplatesHint"/>
+            <EditText
+                android:id="@+id/etLicensePlate"
+                style="@style/etRegister"/>
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_marginTop="@dimen/margin10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <TextView
+                style="@style/textRegister"
+                android:text="@string/gender"
+                />
+
+            <RadioGroup
+                android:layout_marginRight="@dimen/margin4dp"
+                android:background="@drawable/background_layout_white"
+                android:id="@+id/rdGroupGender"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/height40dp"
+                android:layout_gravity="center"
+                android:layout_weight="8"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <RadioButton
+                    android:id="@+id/rdMale"
+                    style="@style/radioButtonGender"
+                    android:drawableLeft="@drawable/ic_male" />
+
+                <RadioButton
+                    android:id="@+id/rdFemale"
+                    style="@style/radioButtonGender"
+                    android:drawableLeft="@drawable/ic_female" />
+
+            </RadioGroup>
+        </LinearLayout>
+
+        <Button
+            android:layout_marginLeft="@dimen/margin10dp"
+            android:id="@+id/btnRegister"
+            style="@style/button.Login"
+            android:layout_marginBottom="@dimen/margin8dp"
+            android:text="@string/register" />
+    </LinearLayout>
+</layout>
