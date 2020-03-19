@@ -180,4 +180,6 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="comfirm">Xác thực</string>
     <string name="erroClient">Có lỗi xảy ra vui lòng kiểm tra lại</string>
     <string name="checkLocation">Vui lòng bật GPS</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_map">Map</string>
 </resources>

@@ -12,7 +12,7 @@ import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.DialogCheckBinding;
 
 public class CheckDialog extends Dialog {
-    //Icon loading equasl logo adidi
+
     private DialogCheckBinding binding;
 
     public CheckDialog(Context context, int themeResId) {

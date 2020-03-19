@@ -12,7 +12,6 @@ public class BaseActivityViewModel {
     }
 
     public void showDialog(boolean isNetworkState, boolean isLocationState) {
-        Log.d("BBB", "showDialog: "+isLocationState);
         if(isNetworkState){
             if(isLocationState){
                 callback.dimissDialog();

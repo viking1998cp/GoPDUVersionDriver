@@ -17,6 +17,7 @@ import gopdu.pdu.gopduversiondriver.IOnBackPressed;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.ActivityDriverUseMainBinding;
 import gopdu.pdu.gopduversiondriver.fragment.DriverMapsFragment;
+import gopdu.pdu.gopduversiondriver.fragment.Map;
 
 public class DriverUseMainActivity extends BaseActivity {
 
@@ -33,6 +34,7 @@ public class DriverUseMainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_driver_use_main);
+        init();
     }
     private void init() {
         driverMapsFragment = new DriverMapsFragment();
