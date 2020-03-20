@@ -2,34 +2,28 @@ package gopdu.pdu.gopduversiondriver.fragment;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
-import android.Manifest;
+import android.accounts.Account;
 import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
-import android.os.Vibrator;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
-import com.firebase.geofire.GeoQuery;
-import com.firebase.geofire.GeoQueryEventListener;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
@@ -42,9 +36,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,14 +46,17 @@ import com.tecorb.hrmovecarmarkeranimation.AnimationClass.HRMarkerAnimation;
 import com.tecorb.hrmovecarmarkeranimation.CallBacks.UpdateLocationCallBack;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import gopdu.pdu.gopduversiondriver.IOnBackPressed;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.FragmentDriverMapsBinding;
+import gopdu.pdu.gopduversiondriver.network.AccountResponse;
+import gopdu.pdu.gopduversiondriver.object.Driver;
+import gopdu.pdu.gopduversiondriver.presenter.PresenterDriverMapFragment;
 import gopdu.pdu.gopduversiondriver.view.ViewDriverMapFragmentListener;
+import gopdu.pdu.gopduversiondriver.viewmodel.TakenAccountInfomationViewModel;
 
-public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmentListener, OnMapReadyCallback, GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener,  GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, IOnBackPressed {
+public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmentListener, OnMapReadyCallback, GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, IOnBackPressed {
 
     private FragmentDriverMapsBinding binding;
     private GoogleMap mMap;
@@ -70,15 +64,23 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     //request old location
     private Location mLastLocation;
     private LocationRequest mLocationRequest;
-    private String customerId="";
+    //Presenter
+    private PresenterDriverMapFragment presenter;
+
+    private String customerId = "";
     private String userId;
-    private boolean requestBoolena =false;
+    private boolean requestBoolena = false;
     private String statusTrip;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private ProgressDialog progressDialog;
-    private int markerCount=0;
+    private int markerCount = 0;
     private Location oldLocation;
 
+
+    private Driver accountDriver;
+
+    //service infomation account
+    TakenAccountInfomationViewModel accountInfomation;
 
     @Nullable
     @Override
@@ -96,13 +98,32 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
     private void init() {
 
+        //Presenter setup
+        presenter = new PresenterDriverMapFragment(this);
+
+
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(getString(R.string.waitingProcess));
         progressDialog.setCancelable(false);
+        progressDialog.show();
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(binding.getRoot().getContext());
         //Get user id
         userId = FirebaseAuth.getInstance().getUid();
+
+        //setup service
+        accountInfomation = ViewModelProviders.of(this).get(TakenAccountInfomationViewModel.class);
+        accountDriver = new Driver();
+
+        //infomation account
+        HashMap<String, String> param = new HashMap<>();
+        param.put(getString(R.string.paramID), userId);
+        accountInfomation.TakenInfomationAccount(param).observe(this, new Observer<AccountResponse>() {
+            @Override
+            public void onChanged(AccountResponse accountResponse) {
+                presenter.reciverInfomationAccount(accountResponse);
+            }
+        });
 
         //Google api set up
         buildGoogleAPiClient();
@@ -115,9 +136,9 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         binding.swWorking.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     connectDriver();
-                }else {
+                } else {
                     disconnectDriver();
                 }
 
@@ -125,7 +146,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         });
     }
 
-    private void connectDriver(){
+    private void connectDriver() {
 
         fusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mlocationCallBack, Looper.myLooper());
         mMap.setMyLocationEnabled(true);
@@ -139,7 +160,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
             if (markerCount == 1) {
                 if (oldLocation != null) {
-                    new HRMarkerAnimation(googleMap,1000, new UpdateLocationCallBack() {
+                    new HRMarkerAnimation(googleMap, 1000, new UpdateLocationCallBack() {
                         @Override
                         public void onUpdatedLocation(Location updatedLocation) {
                             oldLocation = updatedLocation;
@@ -172,22 +193,22 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
     public void displayLocation() {
         try {
-                mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
 
-                if (mLastLocation != null && mLastLocation.getLongitude() != 0.0 && mLastLocation.getLongitude() != 0.0) {
+            if (mLastLocation != null && mLastLocation.getLongitude() != 0.0 && mLastLocation.getLongitude() != 0.0) {
 
-                    if (mMap != null) {
-                        addMarker(mMap, mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                    }
+                if (mMap != null) {
+                    addMarker(mMap, mLastLocation.getLatitude(), mLastLocation.getLongitude());
                 }
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private  void disconnectDriver(){
-        if(fusedLocationProviderClient != null){
+    private void disconnectDriver() {
+        if (fusedLocationProviderClient != null) {
             fusedLocationProviderClient.removeLocationUpdates(mlocationCallBack);
         }
 
@@ -205,8 +226,8 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         @Override
         public void onLocationResult(LocationResult locationResult) {
             for (Location location : locationResult.getLocations()) {
-                if(getActivity() !=null){
-                    LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                if (getActivity() != null) {
+                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 //                    if(customerId.equals("")){
 //                        rideDistance += mLastLocation.distanceTo(location)/1000;
 //                        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -223,12 +244,12 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
                     DatabaseReference refWorKing = FirebaseDatabase.getInstance().getReference("driverWorking");
                     GeoFire geoAvailble = new GeoFire(refAvailble);
                     GeoFire geoWorking = new GeoFire(refWorKing);
-                    switch (customerId){
+                    switch (customerId) {
                         case "":
                             geoWorking.removeLocation(userId);
                             geoAvailble.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
                             break;
-                        default :
+                        default:
                             geoAvailble.removeLocation(userId);
                             geoWorking.setLocation(userId, new GeoLocation(location.getLatitude(), location.getLongitude()));
                             break;
@@ -239,16 +260,15 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         }
     };
 
-    private void laychuyendi(){
+    private void laychuyendi() {
 
         String driverId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        Log.d("BBB", "getAssignedCustomer: "+driverId);
         DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child("User").child("Driver").child(driverId).child("customerRequest").child("customerRideId");
         driverRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    if(binding.swWorking.isChecked()){
+                if (dataSnapshot.exists()) {
+                    if (binding.swWorking.isChecked()) {
 //                        coordinatorCustomerInfo.setVisibility(View.VISIBLE);
 //                        Log.d("BBB", "onDataChange: table on");
 //                        Vibrator vibrator = (Vibrator) getActivity().getSystemService(view.getContext().VIBRATOR_SERVICE);
@@ -264,8 +284,8 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 //                    laythongtinkhachhang();
 
 
-                    Log.d("AAA", "onDataChange: "+customerId);
-                }else {
+                    Log.d("AAA", "onDataChange: " + customerId);
+                } else {
 //                    coordinatorCustomerInfo.setVisibility(View.GONE);
 //                    statusTrip = "";
                     customerId = "";
@@ -283,7 +303,6 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
             }
         });
     }
-
 
 
     @Override
@@ -365,4 +384,12 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         return false;
     }
 
+
+    @Override
+    public void takenInfomationAccount(Driver data) {
+        accountDriver = data;
+        Log.d("BBB", "takenInfomationAccount: " + accountDriver.getImvMotorcyclepapersBackside());
+        progressDialog.dismiss();
+
+    }
 }

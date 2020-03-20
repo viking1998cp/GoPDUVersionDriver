@@ -5,7 +5,9 @@ import com.squareup.okhttp.ResponseBody;
 import java.util.ArrayList;
 import java.util.Map;
 
+import gopdu.pdu.gopduversiondriver.network.AccountResponse;
 import gopdu.pdu.gopduversiondriver.network.ImageRespon;
+import gopdu.pdu.gopduversiondriver.object.Driver;
 import gopdu.pdu.gopduversiondriver.object.ServerResponse;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -35,6 +37,9 @@ public interface DataService {
 
     @GET("checkIdCurrent.php")
     Call<ServerResponse> checkIdCurent(@QueryMap Map<String,String> params);
+
+    @GET("getDriver.php")
+    Call<AccountResponse> getInfomationAccount(@QueryMap Map<String,String> params);
 
 //    @Multipart
 //    @POST("upload_multiple_files1.php")
