@@ -182,4 +182,8 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="checkLocation">Vui lòng bật GPS</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_map">Map</string>
+    <string name="doingJobToBonus">Bạn hãy thực hiện hoàn thành thật nhiều chuyến đi, các tài khoản xứng đáng sẽ nhận được phần thưởng</string>
+    <string name="acceptJob">Thực hiện chuyến đi</string>
+    <string name="price" >%1$s VNĐ</string>
+    <string name="patternVNĐ">###,###</string>
 </resources>

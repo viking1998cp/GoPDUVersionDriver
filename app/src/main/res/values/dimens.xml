@@ -11,7 +11,7 @@
     <dimen name="fontNormal">14sp</dimen>
     <dimen name="fontMediumSmall">16sp</dimen>
     <dimen name="fontMedium">18sp</dimen>
-    <dimen name="fontMediumBig">28sp</dimen>
+    <dimen name="fontMediumBig">24sp</dimen>
     <dimen name="fontSmall">10sp</dimen>
     <dimen name="fontSmallBigger">16sp</dimen>
 
@@ -87,4 +87,6 @@
     <dimen name="imvHeightFace">300dp</dimen>
     <dimen name="radius1dp">1dp</dimen>
     <dimen name="height50dp">50dp</dimen>
+    <dimen name="padding60dp">60dp</dimen>
+    <dimen name="margin50dp">50dp</dimen>
 </resources>

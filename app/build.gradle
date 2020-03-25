@@ -99,6 +99,10 @@ dependencies {
 
 // extension for Mapbox
     implementation 'com.utsman.smartmarker:ext-mapbox:1.3.2@aar'
+
+    //cicle view
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 }
 
 

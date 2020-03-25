@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/cdlInfomationTravel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:paddingBottom="@dimen/margin60dp"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/padding60dp"
+            android:paddingLeft="@dimen/padding10dp"
+            android:paddingRight="@dimen/padding10dp"
+            android:background="@color/colorGray6"
+            >
+            <TextView
+                android:id="@+id/tvPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/fontMedium"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/fontMedium"
+                android:text="GOPDU ECONOMY"
+                android:gravity="left"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                android:layout_marginTop="@dimen/margin16dp"
+                />
+
+            <LinearLayout
+                android:layout_marginTop="@dimen/margin4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_layout_gray"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvDistance"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="@dimen/fontMedium"
+                    android:text="1,8 km"
+                    android:gravity="center"
+                    />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="2"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingTop="@dimen/padding10dp"
+                            android:layout_marginBottom="@dimen/margin24dp"
+                            android:paddingBottom="@dimen/margin16dp"
+                            android:background="@color/colorWhite"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvNamePickup"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/fontMediumBig"
+                                android:text="Cẩm phả"
+                                android:gravity="center"
+                                android:textColor="@color/colorGray5"
+                                />
+                            <TextView
+                                android:id="@+id/tvNamePickupDetail"
+                                android:layout_marginTop="@dimen/margin4dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/fontSmallBigger"
+                                android:text="số 23 cẩm phả quảng ninh việt nam"
+                                android:gravity="center"
+                                android:textColor="@color/colorGray5"
+                                />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:paddingTop="@dimen/padding10dp"
+                            android:paddingBottom="@dimen/padding10dp"
+                            android:background="@color/colorGray2"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvNameDestination"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Cẩm đông"
+                                android:textColor="@color/colorGray5"
+                                android:textSize="@dimen/fontMediumBig" />
+
+                            <TextView
+                                android:id="@+id/tvNameDestinationDetail"
+                                android:layout_marginTop="@dimen/margin4dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="@dimen/fontSmallBigger"
+                                android:text="số 23 cẩm đông quảng ninh việt nam"
+                                android:gravity="center"
+                                android:textColor="@color/colorGray5"
+                                />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                    <ImageView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_drop_down_circle_black_24dp"
+                        android:layout_gravity="center"/>
+                </FrameLayout>
+                <LinearLayout
+                    android:padding="@dimen/padding10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_layout_white">
+                    <TextView
+                        android:gravity="center"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/doingJobToBonus"
+                        android:textSize="@dimen/fontMedium"
+                        android:textColor="@color/colorGray5"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:paddingBottom="@dimen/padding20dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        style="@style/button.Login"
+                        android:text="@string/acceptJob"
+                        />
+                </LinearLayout>
+
+
+                <TextView
+                    android:background="@drawable/background_circle"
+                    android:layout_gravity="center|right|bottom"
+                    android:layout_marginBottom="@dimen/margin4dp"
+                    android:layout_width="@dimen/imvIcon"
+                    android:layout_height="@dimen/imvIcon"
+                    android:gravity="center"
+                    android:text="1"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fontMedium"
+                    android:textStyle="bold"
+                    />
+
+            </FrameLayout>
+
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

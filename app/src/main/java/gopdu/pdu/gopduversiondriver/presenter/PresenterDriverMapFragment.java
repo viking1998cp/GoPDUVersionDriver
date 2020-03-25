@@ -1,6 +1,9 @@
 package gopdu.pdu.gopduversiondriver.presenter;
 
+import android.location.Address;
 import android.util.Log;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import gopdu.pdu.gopduversiondriver.modelresponse.DriverMapFragmentResponse;
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
@@ -20,9 +23,43 @@ public class PresenterDriverMapFragment implements DriverMapFragmentResponse{
     public void reciverInfomationAccount(AccountResponse accountResponse) {
         driverMapFragmentModel.takenInfomationAccount(accountResponse);
     }
+    public void reciverWorking(boolean isChecked) {
+        driverMapFragmentModel.working(isChecked);
+    }
+
+    public void reciverPickUpname(LatLng pickupLatLng) {
+        driverMapFragmentModel.getPickUpName(pickupLatLng);
+    }
+
+    public void reciverDestinationName(LatLng destinaLatLng) {
+        driverMapFragmentModel.getDestinationName(destinaLatLng);
+    }
 
     @Override
     public void takenInfomationAccount(Driver data) {
         callback.takenInfomationAccount(data);
     }
+
+    @Override
+    public void connectWorking() {
+        callback.connectWorking();
+    }
+
+    @Override
+    public void dissconnectWorking() {
+        callback.dissconnectWorking();
+    }
+
+    @Override
+    public void getPickUpName(Address pickup) {
+        callback.getPickUpName(pickup);
+    }
+
+    @Override
+    public void getDestinationName(Address destination) {
+        callback.getDestinationName(destination);
+
+    }
+
+
 }

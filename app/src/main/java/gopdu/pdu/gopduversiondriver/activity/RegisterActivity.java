@@ -97,7 +97,7 @@ public class RegisterActivity extends BaseActivity implements ViewRegisterListen
         gender = "";
         switch (binding.iclRegister.rdGroupGender.getCheckedRadioButtonId()) {
             case R.id.rdMale:
-                gender = "Name";
+                gender = "Nam";
                 break;
             case R.id.rdFemale:
                 gender = "Nữ";

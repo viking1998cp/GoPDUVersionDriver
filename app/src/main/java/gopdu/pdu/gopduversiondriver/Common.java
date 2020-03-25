@@ -29,9 +29,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Pattern;
 
 import gopdu.pdu.gopduversiondriver.dialog.CheckDialog;
@@ -204,5 +206,34 @@ public class Common {
         } else {
             return false;
         }
+    }
+
+    //getAddress
+    public  static Address getAddress(double latitude, double longitude){
+        Geocoder geocoder = new Geocoder(
+                GoPDUApplication.getInstance(), Locale.getDefault());
+        Address obj = null;
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            obj = addresses.get(0);
+
+            return  obj;
+
+            // Toast.makeText(this, "Address=>" + add,
+            // Toast.LENGTH_SHORT).show();
+
+            // TennisAppActivity.showDialog(add);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            Toast.makeText(GoPDUApplication.getInstance(), e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+        return obj;
+    }
+    //format vnd
+    public static String formatVNĐ(int price){
+        DecimalFormat formatter = new DecimalFormat(GoPDUApplication.getInstance().getString(R.string.patternVNĐ));
+        return formatter.format(price);
+
     }
 }

@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.accounts.Account;
 import android.app.ProgressDialog;
+import android.location.Address;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Looper;
@@ -46,7 +46,10 @@ import com.tecorb.hrmovecarmarkeranimation.AnimationClass.HRMarkerAnimation;
 import com.tecorb.hrmovecarmarkeranimation.CallBacks.UpdateLocationCallBack;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import gopdu.pdu.gopduversiondriver.Common;
 import gopdu.pdu.gopduversiondriver.IOnBackPressed;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.FragmentDriverMapsBinding;
@@ -76,11 +79,18 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     private int markerCount = 0;
     private Location oldLocation;
 
-
     private Driver accountDriver;
 
     //service infomation account
-    TakenAccountInfomationViewModel accountInfomation;
+    private TakenAccountInfomationViewModel accountInfomation;
+    private DatabaseReference mdDataPushWorking;
+
+    //travel
+    private int price;
+    private String namePickUpName;
+    private String namePickUpNameDetail;
+    private String destinationName;
+    private String destinationNameDetail;
 
     @Nullable
     @Override
@@ -92,7 +102,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         mapFragment.getMapAsync(this);
         init();
         setOnClick();
-        laychuyendi();
+        getTravel();
         return binding.getRoot();
     }
 
@@ -136,24 +146,12 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         binding.swWorking.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    connectDriver();
-                } else {
-                    disconnectDriver();
-                }
 
+                presenter.reciverWorking(isChecked);
             }
         });
     }
 
-    private void connectDriver() {
-
-        fusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mlocationCallBack, Looper.myLooper());
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setMyLocationButtonEnabled(false);
-
-
-    }
 
     public void addMarker(GoogleMap googleMap, double lat, double lon) {
         try {
@@ -207,18 +205,6 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         }
     }
 
-    private void disconnectDriver() {
-        if (fusedLocationProviderClient != null) {
-            fusedLocationProviderClient.removeLocationUpdates(mlocationCallBack);
-        }
-
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driversAvailable");
-
-        GeoFire geoFire = new GeoFire(ref);
-        geoFire.removeLocation(userId);
-        mMap.setMyLocationEnabled(false);
-
-    }
 
     private HRMarkerAnimation myLocation;
     private Marker myMarker;
@@ -260,38 +246,34 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         }
     };
 
-    private void laychuyendi() {
+    private void getTravel() {
 
         String driverId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child("User").child("Driver").child(driverId).child("customerRequest").child("customerRideId");
         driverRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()) {
+                if (dataSnapshot.exists() && customerId.equals("")) {
                     if (binding.swWorking.isChecked()) {
-//                        coordinatorCustomerInfo.setVisibility(View.VISIBLE);
-//                        Log.d("BBB", "onDataChange: table on");
+
+                        Log.d("BBB", "onDataChange: table on");
 //                        Vibrator vibrator = (Vibrator) getActivity().getSystemService(view.getContext().VIBRATOR_SERVICE);
 //                        until.ring(view.getContext(), vibrator,5000 );
                     }
-//                    bottomSheet =  view.findViewById(R.id.bottom_sheet);
-//                    BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-//                    behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-//                    status =1;
+
                     customerId = dataSnapshot.getValue().toString();
-//                    layvitrikhachhang();
-//                    laynoidenkhachhang();
+                    getLocationCustomer();
+                    getInfomationTravel();
+                    binding.contentTravel.cdlInfomationTravel.setVisibility(View.VISIBLE);
+
 //                    laythongtinkhachhang();
 
 
                     Log.d("AAA", "onDataChange: " + customerId);
                 } else {
-//                    coordinatorCustomerInfo.setVisibility(View.GONE);
-//                    statusTrip = "";
+                    binding.contentTravel.cdlInfomationTravel.setVisibility(View.GONE);
+                    statusTrip = "";
                     customerId = "";
-//                    if(pickupMarker != null){
-//                        pickupMarker.remove();
-//                    }
 
 
                 }
@@ -302,6 +284,75 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
             }
         });
+    }
+
+    private LatLng destinaLatLng;
+    private Marker destinaMaker;
+    private void getInfomationTravel() {
+        String driverId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("BBB", "getAssignedCustomer: "+driverId);
+        DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child("User").child("Driver").child(driverId).child("customerRequest");
+        driverRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    java.util.Map<String,Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                    Double destinationLat = 0.0;
+                    Double destinationlongt = 0.0;
+                    if(map.get("destinationLat")!= null){
+                        destinationLat = Double.valueOf(map.get("destinationLat").toString());
+                    }
+                    if(map.get("destinationLongt")!= null){
+                        destinationlongt = Double.valueOf(map.get("destinationLongt").toString());
+                    }
+                    destinaLatLng = new LatLng(destinationLat,destinationlongt);
+                    presenter.reciverDestinationName(destinaLatLng);
+
+                    if(map.get("price") != null){
+                        price = Integer.parseInt(map.get("price").toString());
+                        binding.contentTravel.tvPrice.setText(getString(R.string.price, Common.formatVNĐ(price)));
+                    }
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private Marker pickupMarker;
+    private LatLng pickupLatLng;
+    private DatabaseReference customerPickupLocationRef;
+    private  ValueEventListener customerPickupLocationRefListener;
+    private void getLocationCustomer() {
+        FirebaseDatabase.getInstance().getReference().child("customerRequest").child(customerId).child("l").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists() && !customerId.equals("")){
+                    List<Object> map = (List<Object>) dataSnapshot.getValue();
+                    double locationLat = 0;
+                    double locationLongi = 0;
+                    if(map.get(0) != null){
+                        locationLat = Double.parseDouble(map.get(0).toString());
+                    }
+                    if(map.get(1) != null){
+                        locationLongi = Double.parseDouble(map.get(1).toString());
+                    }
+                    pickupLatLng = new LatLng(locationLat,locationLongi);
+                    presenter.reciverPickUpname(pickupLatLng);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 
@@ -388,8 +439,66 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     @Override
     public void takenInfomationAccount(Driver data) {
         accountDriver = data;
-        Log.d("BBB", "takenInfomationAccount: " + accountDriver.getImvMotorcyclepapersBackside());
+        mdDataPushWorking = FirebaseDatabase.getInstance().getReference().child("User").child("Driver").child(userId);
         progressDialog.dismiss();
+
+    }
+
+    @Override
+    public void connectWorking() {
+        fusedLocationProviderClient.requestLocationUpdates(mLocationRequest, mlocationCallBack, Looper.myLooper());
+        mMap.setMyLocationEnabled(true);
+        mMap.getUiSettings().setMyLocationButtonEnabled(false);
+
+        HashMap userInfo = new HashMap();
+        userInfo.put(getString(R.string.paramName),accountDriver.getName());
+        Log.d("BBB", "connectWorking: "+accountDriver.getGender());
+        userInfo.put(getString(R.string.paramNumberPhone),accountDriver.getNumberphone());
+        userInfo.put(getString(R.string.paramGender),accountDriver.getGender());
+        userInfo.put(getString(R.string.paramImv_Driverface),accountDriver.getImvDriverface());
+        userInfo.put(getString(R.string.paramBirthDate), accountDriver.getBirthdate());
+        userInfo.put(getString(R.string.paramLicenseplate), accountDriver.getLicenseplates());
+        mdDataPushWorking.updateChildren(userInfo);
+    }
+
+    @Override
+    public void dissconnectWorking() {
+        if (fusedLocationProviderClient != null) {
+            fusedLocationProviderClient.removeLocationUpdates(mlocationCallBack);
+        }
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("driversAvailable");
+
+        GeoFire geoFire = new GeoFire(ref);
+        geoFire.removeLocation(userId);
+        mMap.setMyLocationEnabled(false);
+        mdDataPushWorking.removeValue();
+    }
+
+    @Override
+    public void getPickUpName(Address pickup) {
+        String nameDetail = pickup.getAddressLine(0);
+        String[] names = nameDetail.split(",");
+
+
+        namePickUpName =  names[0] + "," + names[1];
+        namePickUpNameDetail = nameDetail;
+
+        binding.contentTravel.tvNamePickup.setText(namePickUpName);
+        binding.contentTravel.tvNamePickupDetail.setText(namePickUpNameDetail);
+
+    }
+
+    @Override
+    public void getDestinationName(Address destination) {
+        String nameDetail = destination.getAddressLine(0);
+        String[] names = nameDetail.split(",");
+
+        destinationName = names[0] + "," + names[1];;
+        destinationNameDetail = nameDetail;
+
+        binding.contentTravel.tvNameDestination.setText(destinationName);
+        binding.contentTravel.tvNameDestinationDetail.setText(destinationNameDetail);
 
     }
 }

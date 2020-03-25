@@ -1,6 +1,9 @@
 package gopdu.pdu.gopduversiondriver.viewmodel;
 
+import android.location.Address;
 import android.util.Log;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import gopdu.pdu.gopduversiondriver.Common;
 import gopdu.pdu.gopduversiondriver.GoPDUApplication;
@@ -22,5 +25,24 @@ public class DriverMapFragmentViewModel {
         }else {
             Common.ShowToastShort(GoPDUApplication.getInstance().getString(R.string.checkConnect));
         }
+    }
+
+    public void working(boolean isChecked) {
+        if(isChecked){
+            callback.connectWorking();
+        }else {
+            callback.dissconnectWorking();
+        }
+    }
+
+    public void getPickUpName(LatLng pickupLatLng) {
+
+        Address pickup = Common.getAddress(pickupLatLng.latitude, pickupLatLng.longitude);
+        callback.getPickUpName(pickup);
+    }
+
+    public void getDestinationName(LatLng destinaLatLng) {
+        Address destination = Common.getAddress(destinaLatLng.latitude, destinaLatLng.longitude);
+        callback.getDestinationName(destination);
     }
 }
