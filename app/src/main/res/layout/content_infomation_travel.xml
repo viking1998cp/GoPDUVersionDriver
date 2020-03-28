@@ -26,7 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/fontMedium"
-                android:text="GOPDU ECONOMY"
+                android:text="@string/GoPDUEconomy"
                 android:gravity="left"
                 android:textColor="@color/colorWhite"
                 android:textStyle="bold"
@@ -154,6 +154,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <Button
+                        android:id="@+id/btnStartPickUp"
                         style="@style/button.Login"
                         android:text="@string/acceptJob"
                         />
@@ -161,6 +162,7 @@
 
 
                 <TextView
+                    android:id="@+id/tvTimerJob"
                     android:background="@drawable/background_circle"
                     android:layout_gravity="center|right|bottom"
                     android:layout_marginBottom="@dimen/margin4dp"

@@ -30,6 +30,10 @@
 
         <include layout="@layout/content_infomation_travel"
             android:id="@+id/content_travel"/>
+
+        <include layout="@layout/content_pickup_customer"
+            android:id="@+id/content_pickup"
+            />
     </FrameLayout>
 
 

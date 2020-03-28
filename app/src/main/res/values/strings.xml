@@ -168,6 +168,8 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="title_Working">Chế độ làm việc</string>
     <string name="title_History">Lịch sử</string>
     <string name="title_programfile">Tài khoản</string>
+    <string name="GoPDUEconomy">GOPDU ECONOMY</string>
+    <string name="pickup">PICK-UP</string>
 
     //step
 
@@ -185,5 +187,27 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="doingJobToBonus">Bạn hãy thực hiện hoàn thành thật nhiều chuyến đi, các tài khoản xứng đáng sẽ nhận được phần thưởng</string>
     <string name="acceptJob">Thực hiện chuyến đi</string>
     <string name="price" >%1$s VNĐ</string>
+    <string name="distance">%1$.1f Km</string>
     <string name="patternVNĐ">###,###</string>
+    <string name="paramDriverAvailable">driversAvailable</string>
+    <string name="paramDriverWorking">driverWorking</string>
+    <string name="paramUser">User</string>
+    <string name="paramDriver">Driver</string>
+    <string name="paramCustomerRequest">customerRequest</string>
+    <string name="paramCustomerId">customerRideId</string>
+    <string name="paramDestinationLat">destinationLat</string>
+    <string name="paramDestinationLogt">destinationLongt</string>
+    <string name="paramPrice">price</string>
+    <string name="paramL">l</string>
+    <string name="paramCustomer">Customer</string>
+    <string name="driverRequest">DriverRequest</string>
+    <string name="timerWaittingJob">20</string>
+    <string name="paramDistance">distance</string>
+
+    
+    <string name="statusTrip">status</string>
+    <string name="tripPickUp">pickup</string>
+    <string name="tripDropOff">drop_off</string>
+
+    //Pram firebase
 </resources>

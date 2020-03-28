@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -235,5 +236,15 @@ public class Common {
         DecimalFormat formatter = new DecimalFormat(GoPDUApplication.getInstance().getString(R.string.patternVNĐ));
         return formatter.format(price);
 
+    }
+
+    //set weight layout
+    public static LinearLayout.LayoutParams params(int weight){
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                0,
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                weight
+        );
+        return param;
     }
 }
