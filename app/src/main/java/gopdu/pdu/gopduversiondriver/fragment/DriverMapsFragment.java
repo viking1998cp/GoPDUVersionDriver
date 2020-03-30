@@ -19,7 +19,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.Toast;
 
 import com.directions.route.AbstractRouting;
 import com.directions.route.Route;
@@ -123,6 +122,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     private void init() {
 
 
+
         //Presenter setup
         presenter = new PresenterDriverMapFragment(this);
 
@@ -151,6 +151,11 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
             }
         });
 
+        //Trip listener
+        if(tripRef == null){
+            tripRef = FirebaseDatabase.getInstance().getReference().child(getString(R.string.paramUser)).child(getString(R.string.paramCustomer)).child(customerId).child(getString(R.string.driverRequest)).child(getString(R.string.statusTrip));
+        }
+
         //Google api set up
         buildGoogleAPiClient();
         if (!mGoogleApiClient.isConnected()) {
@@ -176,7 +181,22 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
                 showPickUpCustomer();
             }
         });
+
+        binding.contentPickup.imvEndRide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                endRide();
+            }
+        });
+
+        binding.contentPickup.btnPickUpComplete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showInfomationDroffOff();
+            }
+        });
     }
+
 
 
 
@@ -252,9 +272,13 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
                     mLastLocation = location;
                     displayLocation();
-                    if(statusTrip.equals(getString(R.string.tripPickUp))){
-                        chiduongtoikhachhang(pickupLatLng);
-                    }
+
+                    //Billding account google cloud to use api direction
+//                    if(statusTrip.equals(getString(R.string.tripPickUp))){
+//                        directionToCustomer(pickupLatLng);
+//                    }else if(statusTrip.equals(getString(R.string.tripDropOff))){
+//                        directionToCustomer(destinaLatLng);
+//                    }
                     DatabaseReference refAvailble = FirebaseDatabase.getInstance().getReference(getString(R.string.paramDriverAvailable));
                     DatabaseReference refWorKing = FirebaseDatabase.getInstance().getReference(getString(R.string.paramDriverWorking));
                     GeoFire geoAvailble = new GeoFire(refAvailble);
@@ -325,13 +349,26 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         binding.contentPickup.cdlPickUpCustomer.setVisibility(View.VISIBLE);
         binding.contentPickup.tvNamePickupDetail.setText(namePickUpNameDetail);
         binding.contentPickup.tvPrice.setText(getString(R.string.price, Common.formatVNĐ(price)));
-        //Trip listener
-        if(tripRef == null){
-            tripRef = FirebaseDatabase.getInstance().getReference().child(getString(R.string.paramUser)).child(getString(R.string.paramCustomer)).child(customerId).child(getString(R.string.driverRequest)).child(getString(R.string.statusTrip));
-        }
+
         statusTrip = getString(R.string.tripPickUp);
         tripRef.setValue(statusTrip);
-        chiduongtoikhachhang(pickupLatLng);
+//        directionToCustomer(pickupLatLng);
+
+    }
+
+    private void showInfomationDroffOff() {
+        binding.contentPickup.cdlPickUpCustomer.setVisibility(View.GONE);
+        binding.contentTravel.cdlInfomationTravel.setVisibility(View.GONE);
+        binding.contentDroffOff.cdlDropOff.setVisibility(View.VISIBLE);
+        statusTrip = getString(R.string.tripDropOff);
+        tripRef.setValue(statusTrip);
+
+        binding.contentDroffOff.tvNameDestinationDetail.setText(destinationNameDetail);
+        binding.contentDroffOff.tvPrice.setText(getString(R.string.price, Common.formatVNĐ(price)));
+//        directionToCustomer(destinaLatLng);
+
+
+
 
     }
 
@@ -365,6 +402,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
 
         binding.contentTravel.cdlInfomationTravel.setVisibility(View.GONE);
+        binding.contentPickup.cdlPickUpCustomer.setVisibility(View.GONE);
         DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child(getString(R.string.paramUser)).child(getString(R.string.paramDriver)).child(userId).child(getString(R.string.paramCustomerRequest));
         driverRef.removeValue();
 
@@ -622,7 +660,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     }
 
     //Driection
-    private void chiduongtoikhachhang(LatLng pickupLatLng) {
+    private void directionToCustomer(LatLng pickupLatLng) {
         if(pickupLatLng != null  && mLastLocation != null){
             Routing routing = new Routing.Builder()
                     .key(getString(R.string.google_api_key))

@@ -89,5 +89,6 @@
     <dimen name="height50dp">50dp</dimen>
     <dimen name="padding60dp">60dp</dimen>
     <dimen name="margin50dp">50dp</dimen>
+    <dimen name="separateHeight">2dp</dimen>
 
 </resources>

@@ -34,30 +34,32 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.google.android.material:material:1.0.0'
 
     //Google service library
-    implementation 'com.google.firebase:firebase-analytics:17.2.2'
+
     implementation 'com.google.firebase:firebase-core:17.0.0'
     implementation 'com.google.firebase:firebase-auth:17.0.0'
     implementation 'com.google.firebase:firebase-database:17.0.0'
-    implementation 'com.google.android.material:material:1.0.0'
-    implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.firebase:geofire-android:3.0.0'
+
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
+
     implementation 'com.firebaseui:firebase-ui-auth:4.0.0'
-    implementation 'com.google.firebase:firebase-storage:16.1.0'
+
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.github.jd-alexander:library:1.1.0'
     implementation 'com.google.maps:google-maps-services:0.1.20'
     implementation 'com.google.maps.android:android-maps-utils:0.5+'
     implementation 'com.google.android.play:core:1.6.0'
 
-    //Search location
+//    //Search location
     implementation 'com.google.maps:google-maps-services:0.1.20'
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-location:17.0.0'
     implementation 'com.google.android.libraries.places:places-compat:2.0.0'
     implementation 'com.google.android.gms:play-services-places:16.1.0'
-
+//
 
     //Slide library
     implementation 'com.github.smarteist:autoimageslider:1.3.2-appcompat'
@@ -91,17 +93,13 @@ dependencies {
 
     //Marker animation
     implementation 'com.github.TecOrb-Developers:HRMarkerAnimation:fe6f64e75b'
-    // the core library
-    implementation 'com.utsman.smartmarker:core:1.3.2@aar'
-
-// extension for google maps
-    implementation 'com.utsman.smartmarker:ext-googlemaps:1.3.2@aar'
-
-// extension for Mapbox
-    implementation 'com.utsman.smartmarker:ext-mapbox:1.3.2@aar'
 
     //cicle view
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
+    //direction
+
+
 
 }
 

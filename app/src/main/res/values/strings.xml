@@ -208,6 +208,8 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="statusTrip">status</string>
     <string name="tripPickUp">pickup</string>
     <string name="tripDropOff">drop_off</string>
+    <string name="dropoff">DROP OFF</string>
+
 
     //Pram firebase
 </resources>
