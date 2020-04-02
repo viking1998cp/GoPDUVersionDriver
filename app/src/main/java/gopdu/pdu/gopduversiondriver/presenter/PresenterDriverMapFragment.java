@@ -8,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import gopdu.pdu.gopduversiondriver.modelresponse.DriverMapFragmentResponse;
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
 import gopdu.pdu.gopduversiondriver.object.Driver;
+import gopdu.pdu.gopduversiondriver.object.ServerResponse;
 import gopdu.pdu.gopduversiondriver.view.ViewDriverMapFragmentListener;
 import gopdu.pdu.gopduversiondriver.viewmodel.DriverMapFragmentViewModel;
 
@@ -35,6 +36,9 @@ public class PresenterDriverMapFragment implements DriverMapFragmentResponse{
         driverMapFragmentModel.getDestinationName(destinaLatLng);
     }
 
+    public void reciverInsertHistory(ServerResponse serverResponse) {
+        driverMapFragmentModel.insertHistory(serverResponse);
+    }
     @Override
     public void takenInfomationAccount(Driver data) {
         callback.takenInfomationAccount(data);
@@ -58,6 +62,17 @@ public class PresenterDriverMapFragment implements DriverMapFragmentResponse{
     @Override
     public void getDestinationName(Address destination) {
         callback.getDestinationName(destination);
+
+    }
+
+    @Override
+    public void insertSuccess(String message) {
+        callback.insertSuccess(message);
+    }
+
+    @Override
+    public void insertError(String message) {
+        callback.insertError(message);
 
     }
 

@@ -12,4 +12,9 @@ public interface ViewDriverMapFragmentListener {
     void getPickUpName(Address pickup);
 
     void getDestinationName(Address destination);
+
+    void insertSuccess(String message);
+
+    void insertError(String message);
+
 }

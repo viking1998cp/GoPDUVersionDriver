@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:visibility="gone"
+        android:id="@+id/cdlPayment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:background="@color/colorGray6"
+            android:layout_marginBottom="@dimen/margin60dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGray6"
+                    android:paddingTop="@dimen/padding20dp"
+                    android:paddingBottom="@dimen/padding20dp"
+                    android:text="Payment"
+                    android:textColor="@color/colorWhite"
+                    android:textStyle="bold" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/separateHeight"
+                    android:background="@color/colorBlack" />
+
+                <LinearLayout
+                    android:padding="@dimen/padding10dp"
+                    android:background="@color/colorGray6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Hình thức thanh toán"
+                        android:textColor="@color/colorWhite"
+                        android:layout_weight="8"
+                        android:textSize="@dimen/fontMedium"/>
+
+                    <TextView
+                        android:background="@color/colorBlue"
+                        android:gravity="right"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:text="Tiền mặt"
+                        android:textColor="@color/colorWhite"
+                        android:layout_weight="2"
+                        android:textSize="@dimen/fontMedium"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/separateHeight"
+                    android:background="@color/colorGray1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding10dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/margin24dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="5"
+                            android:layout_height="wrap_content"
+                            android:text="Chi phí chuyến đi"
+                            android:textColor="@color/colorGray2"
+                            android:textSize="@dimen/fontMedium"
+                            />
+                        <TextView
+                            android:id="@+id/tripPrice"
+                            android:gravity="right"
+                            android:layout_width="0dp"
+                            android:layout_weight="5"
+                            android:layout_height="wrap_content"
+                            android:text="6.00"
+                            android:textColor="@color/colorGray2"
+                            android:textSize="@dimen/fontMedium"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_marginTop="@dimen/margin24dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="5"
+                            android:layout_height="wrap_content"
+                            android:text="Khuyến mãi và phụ thu"
+                            android:textColor="@color/colorGray2"
+                            android:textSize="@dimen/fontMedium"
+                            />
+                        <TextView
+                            android:gravity="right"
+                            android:layout_width="0dp"
+                            android:layout_weight="5"
+                            android:layout_height="wrap_content"
+                            android:text="0.00"
+                            android:textColor="@color/colorGray2"
+                            android:textSize="@dimen/fontMedium"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="10"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/margin24dp"
+                        android:layout_marginBottom="@dimen/margin24dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_weight="5"
+                            android:layout_height="wrap_content"
+                            android:text="Dịch vụ và quảng cáo"
+                            android:textColor="@color/colorGray2"
+                            android:textSize="@dimen/fontMedium"
+                            />
+                        <TextView
+                            android:id="@+id/tvPaymentForService"
+                            android:gravity="right"
+                            android:layout_width="0dp"
+                            android:layout_weight="5"
+                            android:layout_height="wrap_content"
+                            android:text="-5.00"
+                            android:textColor="@color/colorGray2"
+                            android:textSize="@dimen/fontMedium"
+                            android:textStyle="bold"
+                            />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/separateHeight"
+                    android:background="@color/colorGray1" />
+
+                <LinearLayout
+                    android:padding="@dimen/padding10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="10"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/margin24dp"
+                    android:layout_marginBottom="@dimen/margin10dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="wrap_content"
+                        android:text="Tổng"
+                        android:textColor="@color/colorGray2"
+                        android:textSize="@dimen/fontMediumBig"
+                        />
+                    <TextView
+                        android:id="@+id/tvTotal"
+                        android:gravity="right"
+                        android:layout_width="0dp"
+                        android:layout_weight="5"
+                        android:layout_height="wrap_content"
+                        android:text="1.00"
+                        android:textColor="@color/colorGray2"
+                        android:textSize="@dimen/fontMediumBig"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_layout_white"
+                    android:padding="@dimen/padding15dp"
+                    android:layout_margin="@dimen/margin10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Promo"
+                        android:textSize="@dimen/fontSmallBigger"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_marginTop="@dimen/margin8dp"
+                        android:lineHeight="@dimen/lineHeightMedium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/promo"
+                        android:textSize="@dimen/fontSmallBigger"
+                        />
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/btnPayment"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/buttonJob"
+                    android:background="@drawable/background_button_no_boder"
+                    android:text="@string/payment"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fontMedium"
+                    android:textStyle="bold"
+                    />
+            </ScrollView>
+
+        </LinearLayout>
+        
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

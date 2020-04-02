@@ -39,7 +39,7 @@
     <dimen name="radiusCardView">10dp</dimen>
     <dimen name="cardviewHeightVoucher">300dp</dimen>
     <dimen name="cardview_shadowVoucher">5dp</dimen>
-    <dimen name="lineHeightMedium">20dp</dimen>
+    <dimen name="lineHeightMedium">30dp</dimen>
 
     <dimen name="radiusMedium">5dp</dimen>
     <dimen name="strokeSmaill">1dip</dimen>
@@ -89,6 +89,6 @@
     <dimen name="height50dp">50dp</dimen>
     <dimen name="padding60dp">60dp</dimen>
     <dimen name="margin50dp">50dp</dimen>
-    <dimen name="separateHeight">2dp</dimen>
+    <dimen name="separateHeight">3dp</dimen>
 
 </resources>

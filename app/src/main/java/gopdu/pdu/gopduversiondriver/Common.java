@@ -247,4 +247,9 @@ public class Common {
         );
         return param;
     }
+
+    //price for service
+    public static int priceForService(int price){
+        return price*25/100;
+    }
 }

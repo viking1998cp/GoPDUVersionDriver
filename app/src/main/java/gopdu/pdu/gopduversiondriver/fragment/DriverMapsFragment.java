@@ -65,8 +65,10 @@ import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.FragmentDriverMapsBinding;
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
 import gopdu.pdu.gopduversiondriver.object.Driver;
+import gopdu.pdu.gopduversiondriver.object.ServerResponse;
 import gopdu.pdu.gopduversiondriver.presenter.PresenterDriverMapFragment;
 import gopdu.pdu.gopduversiondriver.view.ViewDriverMapFragmentListener;
+import gopdu.pdu.gopduversiondriver.viewmodel.InsertHistoryViewModel;
 import gopdu.pdu.gopduversiondriver.viewmodel.TakenAccountInfomationViewModel;
 
 public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmentListener, OnMapReadyCallback, GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, IOnBackPressed, RoutingListener {
@@ -95,10 +97,12 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
     //service infomation account
     private TakenAccountInfomationViewModel accountInfomation;
+    private InsertHistoryViewModel insertHistoryModel;
     private DatabaseReference mdDataPushWorking;
 
-    //travel
+    //trip
     private int price;
+    private int priceForService;
     private String namePickUpName;
     private String namePickUpNameDetail;
     private String destinationName;
@@ -139,6 +143,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         //setup service
         accountInfomation = ViewModelProviders.of(this).get(TakenAccountInfomationViewModel.class);
         accountDriver = new Driver();
+        insertHistoryModel = ViewModelProviders.of(this).get(InsertHistoryViewModel.class);
 
 
         //infomation account
@@ -175,7 +180,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         });
 
         //
-        binding.contentTravel.btnStartPickUp.setOnClickListener(new View.OnClickListener() {
+        binding.contentTrip.btnStartPickUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPickUpCustomer();
@@ -195,9 +200,45 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
                 showInfomationDroffOff();
             }
         });
+
+        binding.contentDroffOff.btnDropOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPaymentTrip();
+            }
+        });
+
+        binding.contentPayment.btnPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressDialog.show();
+                insertHistory();
+            }
+        });
     }
 
+    private void insertHistory() {
 
+        Map param = new HashMap();
+        param.put(getString(R.string.paramDriverId_Insert), userId);
+        param.put(getString(R.string.paramcCustomerId_Insert), customerId);
+        param.put(getString(R.string.paramPickUpName_Insert), namePickUpNameDetail);
+        param.put(getString(R.string.paramPickUpLat_Insert), pickupLatLng.latitude);
+        param.put(getString(R.string.paramPickUpLogt_Insert),pickupLatLng.longitude);
+        param.put(getString(R.string.paramDestinationName_Insert), destinationNameDetail);
+        param.put(getString(R.string.paramDestinationLat_Insert), destinaLatLng.latitude);
+        param.put(getString(R.string.paramDestinationLogt_Insert), destinaLatLng.longitude);
+        param.put(getString(R.string.paramPrice_Insert), price);
+        param.put(getString(R.string.paramTime_Insert), Common.getNgayHienTai());
+
+
+        insertHistoryModel.insertHistory(param).observe(this, new Observer<ServerResponse>() {
+            @Override
+            public void onChanged(ServerResponse serverResponse) {
+                presenter.reciverInsertHistory(serverResponse);
+            }
+        });
+    }
 
 
     public void addMyMarker(GoogleMap googleMap, double lat, double lon) {
@@ -316,7 +357,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
 
                         } else {
-                            binding.contentTravel.cdlInfomationTravel.setVisibility(View.GONE);
+                            binding.contentTrip.cdlInfomationTrip.setVisibility(View.GONE);
                             statusTrip = "";
                             customerId = "";
 
@@ -337,15 +378,15 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
     private void showInfomationJob() {
         getLocationCustomer();
-        getInfomationTravel();
-        binding.contentTravel.cdlInfomationTravel.setVisibility(View.VISIBLE);
+        getInfomationTrip();
+        binding.contentTrip.cdlInfomationTrip.setVisibility(View.VISIBLE);
         setUpTimerJob();
     }
 
     private void showPickUpCustomer() {
 
         timerListener.cancel();
-        binding.contentTravel.cdlInfomationTravel.setVisibility(View.GONE);
+        binding.contentTrip.cdlInfomationTrip.setVisibility(View.GONE);
         binding.contentPickup.cdlPickUpCustomer.setVisibility(View.VISIBLE);
         binding.contentPickup.tvNamePickupDetail.setText(namePickUpNameDetail);
         binding.contentPickup.tvPrice.setText(getString(R.string.price, Common.formatVNĐ(price)));
@@ -358,7 +399,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
     private void showInfomationDroffOff() {
         binding.contentPickup.cdlPickUpCustomer.setVisibility(View.GONE);
-        binding.contentTravel.cdlInfomationTravel.setVisibility(View.GONE);
+        binding.contentTrip.cdlInfomationTrip.setVisibility(View.GONE);
         binding.contentDroffOff.cdlDropOff.setVisibility(View.VISIBLE);
         statusTrip = getString(R.string.tripDropOff);
         tripRef.setValue(statusTrip);
@@ -383,7 +424,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
                 public void onTick(long millisUntilFinished) {
                     timerWaitingJob--;
-                    binding.contentTravel.tvTimerJob.setText(timerWaitingJob+"");
+                    binding.contentTrip.tvTimerJob.setText(timerWaitingJob+"");
                     //here you can have your logic to set text to edittext
                 }
 
@@ -397,11 +438,24 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
     }
 
+    //save history trip
+    private void showPaymentTrip() {
+
+        priceForService = Common.priceForService(price);
+        binding.contentDroffOff.cdlDropOff.setVisibility(View.GONE);
+        binding.contentPayment.cdlPayment.setVisibility(View.VISIBLE);
+        binding.contentPayment.tripPrice.setText(Common.formatVNĐ(price));
+        binding.contentPayment.tvPaymentForService.setText(Common.formatVNĐ(priceForService));
+        binding.contentPayment.tvTotal.setText(Common.formatVNĐ(price-priceForService));
+        tripRef.setValue(getString(R.string.tripPayment));
+
+    }
+
     // end ride
     private void endRide() {
 
 
-        binding.contentTravel.cdlInfomationTravel.setVisibility(View.GONE);
+        binding.contentTrip.cdlInfomationTrip.setVisibility(View.GONE);
         binding.contentPickup.cdlPickUpCustomer.setVisibility(View.GONE);
         DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child(getString(R.string.paramUser)).child(getString(R.string.paramDriver)).child(userId).child(getString(R.string.paramCustomerRequest));
         driverRef.removeValue();
@@ -417,13 +471,13 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
             pickupMarker.remove();
         }
 
-        binding.contentTravel.tvDistance.setText("");
-        binding.contentTravel.tvTimerJob .setText(getString(R.string.timerWaittingJob));
-        binding.contentTravel.tvNamePickup.setText("");
-        binding.contentTravel.tvNamePickupDetail.setText("");
-        binding.contentTravel.tvNameDestination.setText("");
-        binding.contentTravel.tvNameDestinationDetail.setText("");
-        binding.contentTravel.tvPrice.setText("");
+        binding.contentTrip.tvDistance.setText("");
+        binding.contentTrip.tvTimerJob .setText(getString(R.string.timerWaittingJob));
+        binding.contentTrip.tvNamePickup.setText("");
+        binding.contentTrip.tvNamePickupDetail.setText("");
+        binding.contentTrip.tvNameDestination.setText("");
+        binding.contentTrip.tvNameDestinationDetail.setText("");
+        binding.contentTrip.tvPrice.setText("");
 
         customerId ="";
         if(pickupMarker != null){
@@ -437,7 +491,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
     private LatLng destinaLatLng;
     private Marker destinaMaker;
-    private void getInfomationTravel() {
+    private void getInfomationTrip() {
         String driverId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child(getString(R.string.paramUser)).child(getString(R.string.paramDriver)).child(driverId).child(getString(R.string.paramCustomerRequest));
@@ -458,7 +512,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
                     if(map.get(getString(R.string.paramPrice)) != null){
                         price = Integer.parseInt(map.get(getString(R.string.paramPrice)).toString());
-                        binding.contentTravel.tvPrice.setText(getString(R.string.price, Common.formatVNĐ(price)));
+                        binding.contentTrip.tvPrice.setText(getString(R.string.price, Common.formatVNĐ(price)));
                     }
 
                     if(map.get(getString(R.string.paramDistance)) != null){
@@ -641,8 +695,8 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         namePickUpName =  names[0] + "," + names[1];
         namePickUpNameDetail = nameDetail;
 
-        binding.contentTravel.tvNamePickup.setText(namePickUpName);
-        binding.contentTravel.tvNamePickupDetail.setText(namePickUpNameDetail);
+        binding.contentTrip.tvNamePickup.setText(namePickUpName);
+        binding.contentTrip.tvNamePickupDetail.setText(namePickUpNameDetail);
 
     }
 
@@ -654,9 +708,23 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         destinationName = names[0] + "," + names[1];;
         destinationNameDetail = nameDetail;
 
-        binding.contentTravel.tvNameDestination.setText(destinationName);
-        binding.contentTravel.tvNameDestinationDetail.setText(destinationNameDetail);
+        binding.contentTrip.tvNameDestination.setText(destinationName);
+        binding.contentTrip.tvNameDestinationDetail.setText(destinationNameDetail);
 
+    }
+
+    @Override
+    public void insertSuccess(String message) {
+        binding.contentPayment.cdlPayment.setVisibility(View.GONE);
+        Common.ShowToastShort(getString(R.string.tripSuccess));
+        endRide();
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void insertError(String message) {
+        Common.ShowToastShort(getString(R.string.notificationFaild));
+        progressDialog.dismiss();
     }
 
     //Driection

@@ -10,6 +10,7 @@ import gopdu.pdu.gopduversiondriver.GoPDUApplication;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.modelresponse.DriverMapFragmentResponse;
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
+import gopdu.pdu.gopduversiondriver.object.ServerResponse;
 
 public class DriverMapFragmentViewModel {
     private DriverMapFragmentResponse callback;
@@ -44,5 +45,13 @@ public class DriverMapFragmentViewModel {
     public void getDestinationName(LatLng destinaLatLng) {
         Address destination = Common.getAddress(destinaLatLng.latitude, destinaLatLng.longitude);
         callback.getDestinationName(destination);
+    }
+
+    public void insertHistory(ServerResponse serverResponse) {
+        if(serverResponse.getSuccess()){
+            callback.insertSuccess(serverResponse.getMessage());
+        }else {
+            callback.insertError(serverResponse.getMessage());
+        }
     }
 }

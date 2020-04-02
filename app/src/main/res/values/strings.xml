@@ -172,7 +172,6 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="pickup">PICK-UP</string>
 
     //step
-
     <string name="register_step1">REGISTER - STEP 1/6</string>
     <string name="register_step2">REGISTER - STEP 2/6</string>
     <string name="register_step3">REGISTER - STEP 3/6</string>
@@ -188,6 +187,8 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="acceptJob">Thực hiện chuyến đi</string>
     <string name="price" >%1$s VNĐ</string>
     <string name="distance">%1$.1f Km</string>
+
+    //param firebase
     <string name="patternVNĐ">###,###</string>
     <string name="paramDriverAvailable">driversAvailable</string>
     <string name="paramDriverWorking">driverWorking</string>
@@ -204,12 +205,27 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="timerWaittingJob">20</string>
     <string name="paramDistance">distance</string>
 
-    
     <string name="statusTrip">status</string>
     <string name="tripPickUp">pickup</string>
     <string name="tripDropOff">drop_off</string>
     <string name="dropoff">DROP OFF</string>
+    <string name="paramcCustomerId_Insert">customerid</string>
+    <string name="paramDriverId_Insert">driverid</string>
+    <string name="paramPickUpName_Insert">pickup_name</string>
+    <string name="paramPickUpLat_Insert">pickup_lat</string>
+    <string name="paramPickUpLogt_Insert">pickup_logt</string>
+    <string name="paramDestinationName_Insert">destination_name</string>
+    <string name="paramDestinationLat_Insert">destination_lat</string>
+    <string name="paramDestinationLogt_Insert">destination_logt</string>
+    <string name="paramPrice_Insert">price</string>
+    <string name="paramTime_Insert">time</string>
+    <string name="promo">Tất cả các dịch vụ được cung cấp bởi GoPDU, tài xế vui lòng không lưu giữ lại các hình ảnh cá nhân của khách hàng, chúng tôi sẽ cố gắng nâng cấp và đảm bảo chất lượng dịch vụ phục vụ tài xế một cách tốt nhất !!</string>
+    <string name="payment">Xác nhận đã thanh toán</string>
+    <string name="tripSuccess">Chúc mừng bạn đã hoàn thành chuyến đi</string>
+    <string name="notificationFaild">Đã xảy ra lỗi hệ thống vui lòng thử lại sau</string>
+    <string name="tripPayment">payment</string>
+
+    //Pram inserHistory
 
 
-    //Pram firebase
 </resources>

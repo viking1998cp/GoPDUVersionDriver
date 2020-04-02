@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:visibility="gone"
-        android:id="@+id/cdlInfomationTravel"
+        android:id="@+id/cdl_infomation_trip"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout

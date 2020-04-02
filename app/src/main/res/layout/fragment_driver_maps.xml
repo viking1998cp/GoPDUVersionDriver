@@ -15,6 +15,13 @@
             android:layout_height="match_parent"
             tools:context=".fragment.MapsActivity" />
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_focus"
+            android:layout_gravity="center|right"
+            android:layout_marginBottom="@dimen/margin60dp"/>
+
 
         <androidx.appcompat.widget.SwitchCompat
             android:layout_margin="@dimen/margin24dp"
@@ -29,7 +36,7 @@
             android:theme="@style/SCBSwitch" />
 
         <include layout="@layout/content_infomation_travel"
-            android:id="@+id/content_travel"/>
+            android:id="@+id/content_trip"/>
 
         <include layout="@layout/content_pickup_customer"
             android:id="@+id/content_pickup"
@@ -37,6 +44,9 @@
 
         <include layout="@layout/content_drop_off"
             android:id="@+id/content_droffOff"/>
+
+        <include layout="@layout/content_payment"
+            android:id="@+id/content_payment"/>
     </FrameLayout>
 
 
