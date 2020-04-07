@@ -16,12 +16,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TakenInfomationAccountRepository {
-    private static TakenInfomationAccountRepository instance;
+public class GetInfomationAccountRepository {
+    private static GetInfomationAccountRepository instance;
 
-    public static TakenInfomationAccountRepository getInstance() {
+    public static GetInfomationAccountRepository getInstance() {
         if (instance == null)
-            instance = new TakenInfomationAccountRepository();
+            instance = new GetInfomationAccountRepository();
         return instance;
     }
 

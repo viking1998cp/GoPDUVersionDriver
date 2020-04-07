@@ -8,13 +8,13 @@ import androidx.lifecycle.LiveData;
 import java.util.Map;
 
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
-import gopdu.pdu.gopduversiondriver.repository.TakenInfomationAccountRepository;
+import gopdu.pdu.gopduversiondriver.repository.GetInfomationAccountRepository;
 
-public class TakenAccountInfomationViewModel extends AndroidViewModel {
-    public TakenAccountInfomationViewModel(Application application){
+public class GetAccountInfomationViewModel extends AndroidViewModel {
+    public GetAccountInfomationViewModel(Application application){
         super(application);
     }
     public LiveData<AccountResponse> TakenInfomationAccount(Map<String, String> params) {
-        return TakenInfomationAccountRepository.getInstance().getMutableLiveData(params);
+        return GetInfomationAccountRepository.getInstance().getMutableLiveData(params);
     }
 }

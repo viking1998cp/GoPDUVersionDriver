@@ -16,6 +16,7 @@
             tools:context=".fragment.MapsActivity" />
 
         <ImageView
+            android:id="@+id/imvMyLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_focus"
@@ -34,6 +35,11 @@
             android:layout_centerVertical="true"
             android:checked="false"
             android:theme="@style/SCBSwitch" />
+
+
+        <include layout="@layout/content_driver_ratting"
+            android:id="@+id/content_driverRatting"
+           />
 
         <include layout="@layout/content_infomation_travel"
             android:id="@+id/content_trip"/>

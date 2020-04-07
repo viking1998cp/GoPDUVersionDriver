@@ -2,9 +2,8 @@ package gopdu.pdu.gopduversiondriver.modelresponse;
 
 import android.location.Address;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import gopdu.pdu.gopduversiondriver.object.Driver;
+import gopdu.pdu.gopduversiondriver.object.TotalTrip;
 
 public interface DriverMapFragmentResponse {
     void takenInfomationAccount(Driver data);
@@ -21,4 +20,6 @@ public interface DriverMapFragmentResponse {
     void insertSuccess(String message);
 
     void insertError(String message);
+
+    void showRatting(TotalTrip totalTrip, double acceptPercent, double cancelPercent);
 }

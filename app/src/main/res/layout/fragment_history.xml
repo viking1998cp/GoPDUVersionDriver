@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragment.HistoryFragment">
+
+
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/tabHistory"
+            app:tabIndicatorColor="#F05681"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="#F05681"
+            app:tabTextColor="#6E6E6E"
+            app:tabIndicatorHeight="2pt"
+            android:background="#FFFFFF"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPagerCustomerMap"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

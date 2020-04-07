@@ -54,12 +54,6 @@ public class Common {
     public static final int RQUEST_CODE_MOTORCYCLEPAPER_BACKSIDE = 8;
 
 
-    //date now
-    public static String getNgayHienTai() {
-        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        return df.format(Calendar.getInstance().getTime());
-    }
-
     //Show toast long
     public static void ShowToastLong(String msg) {
         if (Strings.isEmptyOrWhitespace(msg)) {
@@ -88,6 +82,7 @@ public class Common {
         }
     }
 
+
     static void centerText(View view) {
         if( view instanceof TextView){
             ((TextView) view).setGravity(Gravity.CENTER);
@@ -98,6 +93,12 @@ public class Common {
                 centerText(group.getChildAt(i));
             }
         }
+    }
+
+    //get time now
+    public static String getTimeNow() {
+        SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        return df.format(Calendar.getInstance().getTime());
     }
 
     //Check connect

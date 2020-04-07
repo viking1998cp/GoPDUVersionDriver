@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+
+        android:id="@+id/cdlInfomationDriver"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/margin40dp">
+
+        <androidx.core.widget.NestedScrollView
+
+            android:id="@+id/bottom_sheetDes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin10dp"
+            android:background="@drawable/background_layout_gray"
+            app:behavior_peekHeight="@dimen/peekHeightMenuRatting"
+            app:layout_behavior="@string/bottom_sheet_behavior"
+
+            >
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/padding10dp"
+                android:paddingRight="@dimen/padding10dp">
+
+                <ImageView
+                    android:layout_width="@dimen/imvArrow"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_line" />
+
+                <TextView
+                    android:id="@+id/tvPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="14.000"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fontMediumBig"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_gravity=""
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Credit blance"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/fontSmall"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:padding="@dimen/padding10dp"
+                    android:layout_marginTop="@dimen/margin16dp"
+                    android:layout_marginLeft="@dimen/margin10dp"
+                    android:layout_marginRight="@dimen/margin10dp"
+                    android:layout_marginBottom="@dimen/margin24dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorGray5"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_gravity=""
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/GoPDUEconomy"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="@dimen/fontMediumSmall"
+                        android:textStyle="bold" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:weightSum="12">
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_weight="4"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="@dimen/imvIcon"
+                                android:layout_height="@dimen/imvIcon"
+                                android:src="@drawable/ic_tick"/>
+
+                            <TextView
+                                android:id="@+id/tvAccept"
+                                style="@style/tvDriverRatting"
+                                />
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Accreptance"
+                                android:textColor="@color/colorGray2"
+                                android:textSize="@dimen/fontSmall"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_weight="4"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="@dimen/imvIcon"
+                                android:layout_height="@dimen/imvIcon"
+                                android:src="@drawable/ic_star_black_24dp"/>
+
+                            <TextView
+                                android:id="@+id/tvRatting"
+                                style="@style/tvDriverRatting"/>
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Ratting"
+                                android:textColor="@color/colorGray2"
+                                android:textSize="@dimen/fontSmall"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:gravity="center"
+                            android:layout_width="0dp"
+                            android:layout_weight="4"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="@dimen/imvIcon"
+                                android:layout_height="@dimen/imvIcon"
+                                android:src="@drawable/ic_cancel_round"/>
+
+                            <TextView
+                                android:id="@+id/tvCancel"
+                                style="@style/tvDriverRatting"/>
+
+                            <TextView
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="cancellation"
+                                android:textColor="@color/colorGray2"
+                                android:textSize="@dimen/fontSmall"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

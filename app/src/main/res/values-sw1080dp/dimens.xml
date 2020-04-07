@@ -77,8 +77,6 @@
     <dimen name="padding40dp">40dp</dimen>
     <dimen name="padding30dp">30dp</dimen>
 
-    <dimen name="peekHeightMenu">250dp</dimen>
-    <dimen name="peekHeightMenuActivity">400</dimen>
 
     <dimen name="buttonSearchHeight">40dp</dimen>
     <dimen name="sizeLogoSplash">200dp</dimen>

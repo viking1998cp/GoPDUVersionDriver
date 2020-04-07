@@ -1,14 +1,15 @@
 package gopdu.pdu.gopduversiondriver.presenter;
 
 import android.location.Address;
-import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
 import gopdu.pdu.gopduversiondriver.modelresponse.DriverMapFragmentResponse;
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
+import gopdu.pdu.gopduversiondriver.network.TotalTripResponse;
 import gopdu.pdu.gopduversiondriver.object.Driver;
 import gopdu.pdu.gopduversiondriver.object.ServerResponse;
+import gopdu.pdu.gopduversiondriver.object.TotalTrip;
 import gopdu.pdu.gopduversiondriver.view.ViewDriverMapFragmentListener;
 import gopdu.pdu.gopduversiondriver.viewmodel.DriverMapFragmentViewModel;
 
@@ -39,6 +40,11 @@ public class PresenterDriverMapFragment implements DriverMapFragmentResponse{
     public void reciverInsertHistory(ServerResponse serverResponse) {
         driverMapFragmentModel.insertHistory(serverResponse);
     }
+    public void reciverRatting(TotalTripResponse totalTripResponse) {
+        driverMapFragmentModel.getRatting(totalTripResponse);
+    }
+
+
     @Override
     public void takenInfomationAccount(Driver data) {
         callback.takenInfomationAccount(data);
@@ -74,6 +80,11 @@ public class PresenterDriverMapFragment implements DriverMapFragmentResponse{
     public void insertError(String message) {
         callback.insertError(message);
 
+    }
+
+    @Override
+    public void showRatting(TotalTrip totalTrip, double acceptPercent, double cancelPercent) {
+        callback.showRatting(totalTrip, acceptPercent, cancelPercent);
     }
 
 

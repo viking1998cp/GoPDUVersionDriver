@@ -203,12 +203,6 @@
   <dimen name="padding30dp">
     30dp
   </dimen>
-  <dimen name="peekHeightMenu">
-    250dp
-  </dimen>
-  <dimen name="peekHeightMenuActivity">
-    400
-  </dimen>
   <dimen name="buttonSearchHeight">
     40dp
   </dimen>

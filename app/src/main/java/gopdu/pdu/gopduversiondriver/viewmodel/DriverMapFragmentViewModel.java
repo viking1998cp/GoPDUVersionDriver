@@ -1,6 +1,7 @@
 package gopdu.pdu.gopduversiondriver.viewmodel;
 
 import android.location.Address;
+import android.location.Location;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -10,7 +11,9 @@ import gopdu.pdu.gopduversiondriver.GoPDUApplication;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.modelresponse.DriverMapFragmentResponse;
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
+import gopdu.pdu.gopduversiondriver.network.TotalTripResponse;
 import gopdu.pdu.gopduversiondriver.object.ServerResponse;
+import gopdu.pdu.gopduversiondriver.object.TotalTrip;
 
 public class DriverMapFragmentViewModel {
     private DriverMapFragmentResponse callback;
@@ -52,6 +55,17 @@ public class DriverMapFragmentViewModel {
             callback.insertSuccess(serverResponse.getMessage());
         }else {
             callback.insertError(serverResponse.getMessage());
+        }
+    }
+
+
+    public void getRatting(TotalTripResponse totalTripResponse) {
+        if(totalTripResponse.getSuccess()){
+            TotalTrip totalTrip = totalTripResponse.getData();
+            Log.d("BBB", "getRatting: "+totalTrip.getTripcancel());
+            double acceptPercent = (totalTrip.getTripsuccess()/totalTrip.getTotal())*100;
+            double cancelPercent = (totalTrip.getTripcancel()/totalTrip.getTotal())*100;
+            callback.showRatting(totalTrip, acceptPercent, cancelPercent);
         }
     }
 }

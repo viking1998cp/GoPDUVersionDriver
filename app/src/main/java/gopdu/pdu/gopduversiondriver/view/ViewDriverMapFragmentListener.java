@@ -3,6 +3,7 @@ package gopdu.pdu.gopduversiondriver.view;
 import android.location.Address;
 
 import gopdu.pdu.gopduversiondriver.object.Driver;
+import gopdu.pdu.gopduversiondriver.object.TotalTrip;
 
 public interface ViewDriverMapFragmentListener {
     void takenInfomationAccount(Driver data);
@@ -17,4 +18,5 @@ public interface ViewDriverMapFragmentListener {
 
     void insertError(String message);
 
+    void showRatting(TotalTrip totalTrip, double acceptPercent, double cancelPercent);
 }

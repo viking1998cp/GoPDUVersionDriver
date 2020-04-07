@@ -7,8 +7,10 @@ import java.util.Map;
 
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
 import gopdu.pdu.gopduversiondriver.network.ImageRespon;
+import gopdu.pdu.gopduversiondriver.network.TotalTripResponse;
 import gopdu.pdu.gopduversiondriver.object.Driver;
 import gopdu.pdu.gopduversiondriver.object.ServerResponse;
+import gopdu.pdu.gopduversiondriver.object.TotalTrip;
 import gopdu.pdu.gopduversiondriver.repository.InsertHistoryRepository;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -43,8 +45,12 @@ public interface DataService {
     @GET("getDriver.php")
     Call<AccountResponse> getInfomationAccount(@QueryMap Map<String,String> params);
 
-    @POST("insertHistory.php")
+    @GET("insertHistory.php")
     Call<ServerResponse> insertHistory (@QueryMap Map<String,String> params);
+
+    @GET("getTotalTripDriver.php")
+    Call<TotalTripResponse> getTotalTrip (@QueryMap Map<String,String> params);
+
 
 //    @Multipart
 //    @POST("upload_multiple_files1.php")

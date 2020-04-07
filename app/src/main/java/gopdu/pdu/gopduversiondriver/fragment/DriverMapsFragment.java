@@ -45,6 +45,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,12 +65,15 @@ import gopdu.pdu.gopduversiondriver.IOnBackPressed;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.FragmentDriverMapsBinding;
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
+import gopdu.pdu.gopduversiondriver.network.TotalTripResponse;
 import gopdu.pdu.gopduversiondriver.object.Driver;
 import gopdu.pdu.gopduversiondriver.object.ServerResponse;
+import gopdu.pdu.gopduversiondriver.object.TotalTrip;
 import gopdu.pdu.gopduversiondriver.presenter.PresenterDriverMapFragment;
 import gopdu.pdu.gopduversiondriver.view.ViewDriverMapFragmentListener;
+import gopdu.pdu.gopduversiondriver.viewmodel.GetTotalTripViewModel;
 import gopdu.pdu.gopduversiondriver.viewmodel.InsertHistoryViewModel;
-import gopdu.pdu.gopduversiondriver.viewmodel.TakenAccountInfomationViewModel;
+import gopdu.pdu.gopduversiondriver.viewmodel.GetAccountInfomationViewModel;
 
 public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmentListener, OnMapReadyCallback, GoogleMap.OnCameraMoveStartedListener, GoogleMap.OnCameraIdleListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, IOnBackPressed, RoutingListener {
 
@@ -90,14 +94,18 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     private int markerCount = 0;
     private Location oldLocation;
 
-    private String statusTrip="";
+    private String stateTrip = "";
     private DatabaseReference tripRef;
 
     private Driver accountDriver;
 
     //service infomation account
-    private TakenAccountInfomationViewModel accountInfomation;
+    private GetAccountInfomationViewModel accountInfomation;
+    //Insert data to service
     private InsertHistoryViewModel insertHistoryModel;
+    //Get ratting
+    private GetTotalTripViewModel totalTripModel;
+
     private DatabaseReference mdDataPushWorking;
 
     //trip
@@ -107,7 +115,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     private String namePickUpNameDetail;
     private String destinationName;
     private String destinationNameDetail;
-    private float distance=0;
+    private float distance = 0;
 
     @Nullable
     @Override
@@ -120,11 +128,25 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         init();
         setOnClick();
         getJob();
+        showRattingDriver();
+
         return binding.getRoot();
     }
 
-    private void init() {
+    private void showRattingDriver() {
+        Map param = new HashMap();
+        param.put(getString(R.string.paramDriverId), userId);
+        totalTripModel.getTotalTripResponseLiveData(param).observe(this, new Observer<TotalTripResponse>() {
+            @Override
+            public void onChanged(TotalTripResponse totalTripResponse) {
+                Log.d("BBB", "onChanged: " + totalTripResponse.getSuccess());
+                presenter.reciverRatting(totalTripResponse);
+            }
+        });
 
+    }
+
+    private void init() {
 
 
         //Presenter setup
@@ -141,9 +163,10 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         userId = FirebaseAuth.getInstance().getUid();
 
         //setup service
-        accountInfomation = ViewModelProviders.of(this).get(TakenAccountInfomationViewModel.class);
+        accountInfomation = ViewModelProviders.of(this).get(GetAccountInfomationViewModel.class);
         accountDriver = new Driver();
         insertHistoryModel = ViewModelProviders.of(this).get(InsertHistoryViewModel.class);
+        totalTripModel = ViewModelProviders.of(this).get(GetTotalTripViewModel.class);
 
 
         //infomation account
@@ -157,8 +180,8 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         });
 
         //Trip listener
-        if(tripRef == null){
-            tripRef = FirebaseDatabase.getInstance().getReference().child(getString(R.string.paramUser)).child(getString(R.string.paramCustomer)).child(customerId).child(getString(R.string.driverRequest)).child(getString(R.string.statusTrip));
+        if (tripRef == null) {
+            tripRef = FirebaseDatabase.getInstance().getReference().child(getString(R.string.paramUser)).child(getString(R.string.paramCustomer)).child(customerId).child(getString(R.string.driverRequest)).child(getString(R.string.stateTrip));
         }
 
         //Google api set up
@@ -169,6 +192,13 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     }
 
     private void setOnClick() {
+
+        binding.imvMyLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveToMylocation(mLastLocation);
+            }
+        });
 
         //On off working
         binding.swWorking.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -194,6 +224,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
             }
         });
 
+
         binding.contentPickup.btnPickUpComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,10 +243,12 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
             @Override
             public void onClick(View v) {
                 progressDialog.show();
+                stateTrip = getString(R.string.tripSuccess);
                 insertHistory();
             }
         });
     }
+
 
     private void insertHistory() {
 
@@ -224,12 +257,13 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         param.put(getString(R.string.paramcCustomerId_Insert), customerId);
         param.put(getString(R.string.paramPickUpName_Insert), namePickUpNameDetail);
         param.put(getString(R.string.paramPickUpLat_Insert), pickupLatLng.latitude);
-        param.put(getString(R.string.paramPickUpLogt_Insert),pickupLatLng.longitude);
+        param.put(getString(R.string.paramPickUpLogt_Insert), pickupLatLng.longitude);
         param.put(getString(R.string.paramDestinationName_Insert), destinationNameDetail);
         param.put(getString(R.string.paramDestinationLat_Insert), destinaLatLng.latitude);
         param.put(getString(R.string.paramDestinationLogt_Insert), destinaLatLng.longitude);
         param.put(getString(R.string.paramPrice_Insert), price);
-        param.put(getString(R.string.paramTime_Insert), Common.getNgayHienTai());
+        param.put(getString(R.string.paramTime_Insert), Common.getTimeNow());
+        param.put(getString(R.string.paramState_Insert), stateTrip);
 
 
         insertHistoryModel.insertHistory(param).observe(this, new Observer<ServerResponse>() {
@@ -255,18 +289,18 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
                 } else {
                     oldLocation = mLastLocation;
                 }
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 18f));
+
             } else if (markerCount == 0) {
                 if (myMarker != null) {
                     myMarker.remove();
                 }
-                mMap = googleMap;
 
                 LatLng latLng = new LatLng(lat, lon);
 
                 myMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lon))
                         .icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_car_foreground)));
-                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 18f));
+
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15f));
 
                 /*################### Set Marker Count to 1 after first marker is created ###################*/
 
@@ -315,9 +349,9 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
                     displayLocation();
 
                     //Billding account google cloud to use api direction
-//                    if(statusTrip.equals(getString(R.string.tripPickUp))){
+//                    if(stateTrip.equals(getString(R.string.tripPickUp))){
 //                        directionToCustomer(pickupLatLng);
-//                    }else if(statusTrip.equals(getString(R.string.tripDropOff))){
+//                    }else if(stateTrip.equals(getString(R.string.tripDropOff))){
 //                        directionToCustomer(destinaLatLng);
 //                    }
                     DatabaseReference refAvailble = FirebaseDatabase.getInstance().getReference(getString(R.string.paramDriverAvailable));
@@ -340,6 +374,10 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         }
     };
 
+    private void moveToMylocation(Location mLastLocation) {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), 15f));
+    }
+
     private void getJob() {
 
         String driverId = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -347,23 +385,22 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         driverRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Log.d("BBB", "onDataChange: "+dataSnapshot);
-                    if(binding.swWorking.isChecked()){
-                        if (dataSnapshot.exists() && customerId.equals("")) {
+                Log.d("BBB", "onDataChange: " + dataSnapshot);
+                if (binding.swWorking.isChecked()) {
+                    if (dataSnapshot.exists() && customerId.equals("")) {
 //                        Vibrator vibrator = (Vibrator) getActivity().getSystemService(view.getContext().VIBRATOR_SERVICE);
 //                        until.ring(view.getContext(), vibrator,5000 );
-                            customerId = dataSnapshot.getValue().toString();
-                            showInfomationJob();
+                        customerId = dataSnapshot.getValue().toString();
+                        showInfomationJob();
 
 
-                        } else {
-                            binding.contentTrip.cdlInfomationTrip.setVisibility(View.GONE);
-                            statusTrip = "";
-                            customerId = "";
+                    } else {
+                        binding.contentTrip.cdlInfomationTrip.setVisibility(View.GONE);
+                        stateTrip = "";
+                        customerId = "";
 
-                        }
                     }
-
+                }
 
 
             }
@@ -383,6 +420,33 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         setUpTimerJob();
     }
 
+    // Setup time accept job ( 20s )
+    private int timerWaitingJob;
+    private CountDownTimer timerListener;
+
+    private void setUpTimerJob() {
+        timerWaitingJob = 20;
+        if (timerListener == null) {
+            timerListener = new CountDownTimer(20000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    timerWaitingJob--;
+                    binding.contentTrip.tvTimerJob.setText(timerWaitingJob + "");
+                    //here you can have your logic to set text to edittext
+                }
+
+                public void onFinish() {
+                    stateTrip = getString(R.string.tripCancel);
+                    endRide();
+                    insertHistory();
+                }
+
+            };
+        }
+        timerListener.start();
+
+    }
+
     private void showPickUpCustomer() {
 
         timerListener.cancel();
@@ -391,8 +455,8 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         binding.contentPickup.tvNamePickupDetail.setText(namePickUpNameDetail);
         binding.contentPickup.tvPrice.setText(getString(R.string.price, Common.formatVNĐ(price)));
 
-        statusTrip = getString(R.string.tripPickUp);
-        tripRef.setValue(statusTrip);
+        stateTrip = getString(R.string.tripPickUp);
+        tripRef.setValue(stateTrip);
 //        directionToCustomer(pickupLatLng);
 
     }
@@ -401,42 +465,16 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         binding.contentPickup.cdlPickUpCustomer.setVisibility(View.GONE);
         binding.contentTrip.cdlInfomationTrip.setVisibility(View.GONE);
         binding.contentDroffOff.cdlDropOff.setVisibility(View.VISIBLE);
-        statusTrip = getString(R.string.tripDropOff);
-        tripRef.setValue(statusTrip);
+        stateTrip = getString(R.string.tripDropOff);
+        tripRef.setValue(stateTrip);
 
         binding.contentDroffOff.tvNameDestinationDetail.setText(destinationNameDetail);
         binding.contentDroffOff.tvPrice.setText(getString(R.string.price, Common.formatVNĐ(price)));
 //        directionToCustomer(destinaLatLng);
 
 
-
-
     }
 
-
-    // Setup time accept job ( 20s )
-    private int timerWaitingJob ;
-    private CountDownTimer timerListener;
-    private void setUpTimerJob() {
-        timerWaitingJob = 20;
-        if(timerListener ==null){
-            timerListener = new CountDownTimer(20000, 1000) {
-
-                public void onTick(long millisUntilFinished) {
-                    timerWaitingJob--;
-                    binding.contentTrip.tvTimerJob.setText(timerWaitingJob+"");
-                    //here you can have your logic to set text to edittext
-                }
-
-                public void onFinish() {
-                    endRide();
-                }
-
-            };
-        }
-        timerListener.start();
-
-    }
 
     //save history trip
     private void showPaymentTrip() {
@@ -446,15 +484,13 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         binding.contentPayment.cdlPayment.setVisibility(View.VISIBLE);
         binding.contentPayment.tripPrice.setText(Common.formatVNĐ(price));
         binding.contentPayment.tvPaymentForService.setText(Common.formatVNĐ(priceForService));
-        binding.contentPayment.tvTotal.setText(Common.formatVNĐ(price-priceForService));
+        binding.contentPayment.tvTotal.setText(Common.formatVNĐ(price - priceForService));
         tripRef.setValue(getString(R.string.tripPayment));
 
     }
 
     // end ride
     private void endRide() {
-
-
         binding.contentTrip.cdlInfomationTrip.setVisibility(View.GONE);
         binding.contentPickup.cdlPickUpCustomer.setVisibility(View.GONE);
         DatabaseReference driverRef = FirebaseDatabase.getInstance().getReference().child(getString(R.string.paramUser)).child(getString(R.string.paramDriver)).child(userId).child(getString(R.string.paramCustomerRequest));
@@ -465,32 +501,33 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference(getString(R.string.paramCustomerRequest));
         GeoFire geoFire = new GeoFire(ref);
         geoFire.removeLocation(customerId);
-        customerId="";
+        customerId = "";
 
-        if(pickupMarker != null){
+        if (pickupMarker != null) {
             pickupMarker.remove();
         }
 
         binding.contentTrip.tvDistance.setText("");
-        binding.contentTrip.tvTimerJob .setText(getString(R.string.timerWaittingJob));
+        binding.contentTrip.tvTimerJob.setText(getString(R.string.timerWaittingJob));
         binding.contentTrip.tvNamePickup.setText("");
         binding.contentTrip.tvNamePickupDetail.setText("");
         binding.contentTrip.tvNameDestination.setText("");
         binding.contentTrip.tvNameDestinationDetail.setText("");
         binding.contentTrip.tvPrice.setText("");
 
-        customerId ="";
-        if(pickupMarker != null){
+        customerId = "";
+        if (pickupMarker != null) {
             pickupMarker.remove();
         }
-        if(customerPickupLocationRefListener != null){
+        if (customerPickupLocationRefListener != null) {
             customerPickupLocationRef.removeEventListener(customerPickupLocationRefListener);
         }
-        statusTrip = "";
+        stateTrip = "";
     }
 
     private LatLng destinaLatLng;
     private Marker destinaMaker;
+
     private void getInfomationTrip() {
         String driverId = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -498,27 +535,27 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         driverRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    java.util.Map<String,Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                if (dataSnapshot.exists()) {
+                    java.util.Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
                     Double destinationLat = 0.0;
                     Double destinationlongt = 0.0;
-                    if(map.get(getString(R.string.paramDestinationLat))!= null){
+                    if (map.get(getString(R.string.paramDestinationLat)) != null) {
                         destinationLat = Double.valueOf(map.get(getString(R.string.paramDestinationLat)).toString());
                     }
-                    if(map.get(getString(R.string.paramDestinationLogt))!= null){
+                    if (map.get(getString(R.string.paramDestinationLogt)) != null) {
                         destinationlongt = Double.valueOf(map.get(getString(R.string.paramDestinationLogt)).toString());
                     }
-                    destinaLatLng = new LatLng(destinationLat,destinationlongt);
+                    destinaLatLng = new LatLng(destinationLat, destinationlongt);
 
-                    if(map.get(getString(R.string.paramPrice)) != null){
+                    if (map.get(getString(R.string.paramPrice)) != null) {
                         price = Integer.parseInt(map.get(getString(R.string.paramPrice)).toString());
                         binding.contentTrip.tvPrice.setText(getString(R.string.price, Common.formatVNĐ(price)));
                     }
 
-                    if(map.get(getString(R.string.paramDistance)) != null){
+                    if (map.get(getString(R.string.paramDistance)) != null) {
                         distance = Float.parseFloat(map.get(getString(R.string.paramDistance)).toString());
                     }
-                    if(map.get(getString(R.string.paramDistance)) != null){
+                    if (map.get(getString(R.string.paramDistance)) != null) {
                         distance = Float.parseFloat(map.get(getString(R.string.paramDistance)).toString());
                     }
 
@@ -537,22 +574,23 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     private Marker pickupMarker;
     private LatLng pickupLatLng;
     private DatabaseReference customerPickupLocationRef;
-    private  ValueEventListener customerPickupLocationRefListener;
+    private ValueEventListener customerPickupLocationRefListener;
+
     private void getLocationCustomer() {
         FirebaseDatabase.getInstance().getReference().child(getString(R.string.paramCustomerRequest)).child(customerId).child(getString(R.string.paramL)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists() && !customerId.equals("")){
+                if (dataSnapshot.exists() && !customerId.equals("")) {
                     List<Object> map = (List<Object>) dataSnapshot.getValue();
                     double locationLat = 0;
                     double locationLongi = 0;
-                    if(map.get(0) != null){
+                    if (map.get(0) != null) {
                         locationLat = Double.parseDouble(map.get(0).toString());
                     }
-                    if(map.get(1) != null){
+                    if (map.get(1) != null) {
                         locationLongi = Double.parseDouble(map.get(1).toString());
                     }
-                    pickupLatLng = new LatLng(locationLat,locationLongi);
+                    pickupLatLng = new LatLng(locationLat, locationLongi);
                     presenter.reciverPickUpname(pickupLatLng);
 
                 }
@@ -662,10 +700,10 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
 
         HashMap userInfo = new HashMap();
-        userInfo.put(getString(R.string.paramName),accountDriver.getName());
-        userInfo.put(getString(R.string.paramNumberPhone),accountDriver.getNumberphone());
-        userInfo.put(getString(R.string.paramGender),accountDriver.getGender());
-        userInfo.put(getString(R.string.paramImv_Driverface),accountDriver.getImvDriverface());
+        userInfo.put(getString(R.string.paramName), accountDriver.getName());
+        userInfo.put(getString(R.string.paramNumberPhone), accountDriver.getNumberphone());
+        userInfo.put(getString(R.string.paramGender), accountDriver.getGender());
+        userInfo.put(getString(R.string.paramImv_Driverface), accountDriver.getImvDriverface());
         userInfo.put(getString(R.string.paramBirthDate), accountDriver.getBirthdate());
         userInfo.put(getString(R.string.paramLicenseplate), accountDriver.getLicenseplates());
 
@@ -692,7 +730,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         String[] names = nameDetail.split(",");
 
 
-        namePickUpName =  names[0] + "," + names[1];
+        namePickUpName = names[0] + "," + names[1];
         namePickUpNameDetail = nameDetail;
 
         binding.contentTrip.tvNamePickup.setText(namePickUpName);
@@ -705,7 +743,8 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         String nameDetail = destination.getAddressLine(0);
         String[] names = nameDetail.split(",");
 
-        destinationName = names[0] + "," + names[1];;
+        destinationName = names[0] + "," + names[1];
+        ;
         destinationNameDetail = nameDetail;
 
         binding.contentTrip.tvNameDestination.setText(destinationName);
@@ -727,15 +766,32 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         progressDialog.dismiss();
     }
 
+    @Override
+    public void showRatting(TotalTrip totalTrip, double acceptPercent, double cancelPercent) {
+
+        View bottomSheet = binding.contentDriverRatting.bottomSheetDes;
+        BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
+        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+        ;
+
+        Log.d("BBB", "showRatting: " + acceptPercent);
+        binding.contentDriverRatting.tvAccept.setText(getString(R.string.percent, acceptPercent));
+
+        binding.contentDriverRatting.tvCancel.setText(getString(R.string.percent, cancelPercent));
+
+        binding.contentDriverRatting.tvRatting.setText(getString(R.string.percent, totalTrip.getRatting()));
+
+    }
+
     //Driection
     private void directionToCustomer(LatLng pickupLatLng) {
-        if(pickupLatLng != null  && mLastLocation != null){
+        if (pickupLatLng != null && mLastLocation != null) {
             Routing routing = new Routing.Builder()
                     .key(getString(R.string.google_api_key))
                     .travelMode(AbstractRouting.TravelMode.DRIVING)
                     .withListener(this)
                     .alternativeRoutes(false)
-                    .waypoints(new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude()), pickupLatLng)
+                    .waypoints(new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude()), pickupLatLng)
                     .build();
             routing.execute();
         }
@@ -744,16 +800,17 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
     @Override
     public void onRoutingFailure(RouteException e) {
-        if(e != null) {
+        if (e != null) {
             Common.ShowToastShort(e.getMessage());
-            Log.d("BBB", "onRoutingFailure: "+e.getMessage().toString());
-        }else {
+            Log.d("BBB", "onRoutingFailure: " + e.getMessage().toString());
+        } else {
             Common.ShowToastShort(getString(R.string.checkConnect));
         }
     }
 
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
+
     @Override
     public void onRoutingStart() {
 
@@ -761,7 +818,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
     @Override
     public void onRoutingSuccess(ArrayList<Route> route, int shortestRouteIndex) {
-        if(polylines.size()>0) {
+        if (polylines.size() > 0) {
             for (Polyline poly : polylines) {
                 poly.remove();
             }
@@ -769,7 +826,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
 
         polylines = new ArrayList<>();
         //add route(s) to the map.
-        for (int i = 0; i <route.size(); i++) {
+        for (int i = 0; i < route.size(); i++) {
 
             //In case of more than 5 alternative routes
             int colorIndex = i % COLORS.length;
@@ -786,8 +843,9 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
             route.get(i).getDistanceValue();
         }
     }
-    public void erasePolyLines(){
-        for (Polyline line: polylines){
+
+    public void erasePolyLines() {
+        for (Polyline line : polylines) {
             line.remove();
         }
         polylines.clear();

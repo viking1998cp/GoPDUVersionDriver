@@ -1,7 +1,6 @@
 package gopdu.pdu.gopduversiondriver.activity;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -17,13 +16,14 @@ import gopdu.pdu.gopduversiondriver.IOnBackPressed;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.ActivityDriverUseMainBinding;
 import gopdu.pdu.gopduversiondriver.fragment.DriverMapsFragment;
-import gopdu.pdu.gopduversiondriver.fragment.Map;
+import gopdu.pdu.gopduversiondriver.fragment.HistoryFragment;
 
 public class DriverUseMainActivity extends BaseActivity {
 
     private ActivityDriverUseMainBinding binding;
     private int back;
     private DriverMapsFragment driverMapsFragment;
+    private HistoryFragment historyFragment;
 
     @Override
     public int getLayoutId() {
@@ -35,10 +35,12 @@ public class DriverUseMainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_driver_use_main);
         init();
+        setUpMenuOnClick();
     }
     private void init() {
         driverMapsFragment = new DriverMapsFragment();
-        loadFragment(driverMapsFragment);
+        historyFragment = new HistoryFragment();
+        loadFragment(driverMapsFragment, R.id.navigation_work);
     }
 
     private void setUpMenuOnClick() {
@@ -46,16 +48,15 @@ public class DriverUseMainActivity extends BaseActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
-                    case R.id.navigation_gifts:
+                    case R.id.navigation_work:
                         if(back != 1){
                             back =1;
-                            loadFragment(driverMapsFragment);
+                            loadFragment(driverMapsFragment, R.id.navigation_work);
                         }
                         return true;
-                    case R.id.navigation_cart:
+                    case R.id.navigation_history:
                         if(back != 2){
-//                            fragment = new HistoryCustomerFragment();
-//                            loadFragment(fragment);
+                            loadFragment(historyFragment, R.id.navigation_history);
                             back =2;
                         }
 
@@ -73,12 +74,20 @@ public class DriverUseMainActivity extends BaseActivity {
             }
         });
     }
-    public void loadFragment(Fragment fragment) {
 
+
+    public void loadFragment(Fragment fragment, int id) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_container, fragment,"MyFragment");
+
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        if (fragment.isAdded()) {
+            fragmentTransaction.show(fragment);
+        } else {
+            fragmentTransaction.addToBackStack(id + "stack_item");
+            fragmentTransaction.replace(R.id.frame_container, fragment);
+
+        }
         fragmentTransaction.commit();
     }
 
