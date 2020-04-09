@@ -5,25 +5,53 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragment.HistoryFragment">
-
-
-
-        <com.google.android.material.tabs.TabLayout
-            android:layout_marginTop="10dp"
-            android:id="@+id/tabHistory"
-            app:tabIndicatorColor="#F05681"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="#F05681"
-            app:tabTextColor="#6E6E6E"
-            app:tabIndicatorHeight="2pt"
-            android:background="#FFFFFF"
+        tools:context=".fragment.HistoryFragment"
+        android:background="@color/colorWhite">
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/viewPagerCustomerMap"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"/>
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_top"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:minHeight="?attr/actionBarSize"
+                >
+
+                <TextView
+                    android:textSize="@dimen/fontMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_History"
+                    android:layout_gravity="center"
+                    android:id="@+id/toolbar_title"
+                    android:textColor="@color/colorBlack"
+                    android:textStyle="bold"/>
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <com.google.android.material.tabs.TabLayout
+                android:padding="@dimen/padding10dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/tabHistory"
+                app:tabIndicatorColor="@color/colorGreen"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorGreen"
+                app:tabTextColor="@color/colorGray6"
+                app:tabIndicatorHeight="2pt"
+                android:background="#FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerHistory"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+        </LinearLayout>
+
+
+
 
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>

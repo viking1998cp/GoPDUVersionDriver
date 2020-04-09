@@ -88,8 +88,8 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:layout_width="@dimen/imvIcon"
-                                android:layout_height="@dimen/imvIcon"
+                                android:layout_width="@dimen/imvIconBig"
+                                android:layout_height="@dimen/imvIconBig"
                                 android:src="@drawable/ic_tick"/>
 
                             <TextView
@@ -117,8 +117,8 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:layout_width="@dimen/imvIcon"
-                                android:layout_height="@dimen/imvIcon"
+                                android:layout_width="@dimen/imvIconBig"
+                                android:layout_height="@dimen/imvIconBig"
                                 android:src="@drawable/ic_star_black_24dp"/>
 
                             <TextView
@@ -144,8 +144,8 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:layout_width="@dimen/imvIcon"
-                                android:layout_height="@dimen/imvIcon"
+                                android:layout_width="@dimen/imvIconBig"
+                                android:layout_height="@dimen/imvIconBig"
                                 android:src="@drawable/ic_cancel_round"/>
 
                             <TextView

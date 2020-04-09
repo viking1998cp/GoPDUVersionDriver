@@ -40,7 +40,7 @@ public class DriverUseMainActivity extends BaseActivity {
     private void init() {
         driverMapsFragment = new DriverMapsFragment();
         historyFragment = new HistoryFragment();
-        loadFragment(driverMapsFragment, R.id.navigation_work);
+        loadFragment(historyFragment, R.id.navigation_work);
     }
 
     private void setUpMenuOnClick() {

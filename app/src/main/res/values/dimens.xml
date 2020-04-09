@@ -17,8 +17,11 @@
 
     <dimen name="padding10dp">10dp</dimen>
     <dimen name="margin8dp">8dp</dimen>
-    <dimen name="imvIconSmall">24dp</dimen>
-    <dimen name="imvIcon">36dp</dimen>
+    <dimen name="imvIconMedium">18dp</dimen>
+    <dimen name="imvIconBig">36dp</dimen>
+    <dimen name="imvIconSmall">4dp</dimen>
+
+
     <dimen name="padding5dp">5dp</dimen>
     <dimen name="margin16dp">16dp</dimen>
 

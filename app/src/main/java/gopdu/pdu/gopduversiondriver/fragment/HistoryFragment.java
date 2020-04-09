@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import gopdu.pdu.gopduversiondriver.R;
+import gopdu.pdu.gopduversiondriver.adapter.MainViewpager;
 import gopdu.pdu.gopduversiondriver.databinding.FragmentHistoryBinding;
 
 public class HistoryFragment extends Fragment {
@@ -33,7 +34,16 @@ public class HistoryFragment extends Fragment {
     }
 
     private void init() {
-        binding.tabHistory.getTabAt(0).setText("Accept");
-        binding.tabHistory.getTabAt(1).setText("Cancel");
+
+        MainViewpager mainViewpager = new MainViewpager(getFragmentManager());
+        mainViewpager.addfragment(new Fragment(), "Accept");
+        mainViewpager.addfragment(new Fragment(), "Cancel");
+
+        binding.viewPagerHistory.setAdapter(mainViewpager);
+        binding.tabHistory.setupWithViewPager(binding.viewPagerHistory);
+        binding.tabHistory.getTabAt(0);
+        binding.tabHistory.getTabAt(1);
+
+
     }
 }

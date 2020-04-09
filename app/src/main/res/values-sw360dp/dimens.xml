@@ -44,10 +44,10 @@
   <dimen name="margin8dp">
     8dp
   </dimen>
-  <dimen name="imvIconSmall">
+  <dimen name="imvIconMedium">
     24dp
   </dimen>
-  <dimen name="imvIcon">
+  <dimen name="imvIconBig">
     36dp
   </dimen>
   <dimen name="padding5dp">
