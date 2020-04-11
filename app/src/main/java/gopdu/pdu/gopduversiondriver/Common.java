@@ -138,7 +138,7 @@ public class Common {
 
 
     public static float getDistance(LatLng destinationLng, LatLng pickupLng){
-        return (float) SphericalUtil.computeDistanceBetween(destinationLng, pickupLng);
+        return (float) SphericalUtil.computeDistanceBetween(destinationLng, pickupLng)/1000;
     }
 
 

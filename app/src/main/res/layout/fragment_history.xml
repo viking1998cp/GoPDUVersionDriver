@@ -6,6 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragment.HistoryFragment"
+        android:layout_marginBottom="@dimen/margin60dp"
         android:background="@color/colorWhite">
         <LinearLayout
             android:orientation="vertical"
@@ -48,6 +49,16 @@
                 android:id="@+id/viewPagerHistory"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rclHistory"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </LinearLayout>
 
 

@@ -131,7 +131,7 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="errorMotorcycleImage">Thiếu ảnh giấy tờ xe 2 mặt trước và sau</string>
     <string name="errorDriverFace">Thiếu ảnh chân dung</string>
 
-    //register driver query param
+    //query param
     <string name="paramID">id</string>
     <string name="paramName">name</string>
     <string name="paramGender">gender</string>
@@ -233,6 +233,14 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
 
     <string name="title_activity_history_fragment">HistoryFragment</string>
     <string name="paramDriverId">driverid</string>
+    <string name="paramPage">page</string>
+    <string name="paramState">state</string>
+    <string name="param_StateAll">all</string>
+    <string name="param_StateSuccess">success</string>
+    <string name="Successs">Success</string>
+    <string name="Cancel">Cancel</string>
+    <string name="param_StateCancel">cancel</string>
+    <string name="reciverAllData">Đã tải hết dữ liệu</string>
 
 
     //Pram inserHistory
