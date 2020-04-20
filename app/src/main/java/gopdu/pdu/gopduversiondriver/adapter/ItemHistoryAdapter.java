@@ -20,6 +20,7 @@ import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.ItemHistoryBinding;
 import gopdu.pdu.gopduversiondriver.databinding.ItemLoadingBinding;
 import gopdu.pdu.gopduversiondriver.object.History;
+import gopdu.pdu.gopduversiondriver.object.HistoryDetail;
 
 public class ItemHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
@@ -40,7 +41,6 @@ public class ItemHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             ItemHistoryBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_history, parent, false);
             return new ItemHistoryAdapter.ItemRowHolder(binding);
         } else {
-            Log.d("BBB", "onCreateViewHolder: ld");
             ItemLoadingBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_loading, parent, false);
             return new ItemHistoryAdapter.LoadingViewHolder(binding);
         }
@@ -61,9 +61,15 @@ public class ItemHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return arrayList == null ? 0 : arrayList.size();
     }
 
+
+
     @Override
     public int getItemViewType(int position) {
         return arrayList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+    }
+
+    public History getItem(int position){
+        return arrayList.get(position);
     }
 
     private class ItemRowHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

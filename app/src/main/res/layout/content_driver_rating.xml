@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin10dp"
             android:background="@drawable/background_layout_gray"
-            app:behavior_peekHeight="@dimen/peekHeightMenuRatting"
+            app:behavior_peekHeight="@dimen/peekHeightMenuRating"
             app:layout_behavior="@string/bottom_sheet_behavior"
 
             >
@@ -94,7 +94,7 @@
 
                             <TextView
                                 android:id="@+id/tvAccept"
-                                style="@style/tvDriverRatting"
+                                style="@style/tvDriverRating"
                                 />
 
                             <TextView
@@ -122,15 +122,15 @@
                                 android:src="@drawable/ic_star_black_24dp"/>
 
                             <TextView
-                                android:id="@+id/tvRatting"
-                                style="@style/tvDriverRatting"/>
+                                android:id="@+id/tvRating"
+                                style="@style/tvDriverRating"/>
 
                             <TextView
 
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="Ratting"
+                                android:text="Rating"
                                 android:textColor="@color/colorGray2"
                                 android:textSize="@dimen/fontSmall"
                                 android:textStyle="bold" />
@@ -150,7 +150,7 @@
 
                             <TextView
                                 android:id="@+id/tvCancel"
-                                style="@style/tvDriverRatting"/>
+                                style="@style/tvDriverRating"/>
 
                             <TextView
 

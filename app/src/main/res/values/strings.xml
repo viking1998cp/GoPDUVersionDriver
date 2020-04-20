@@ -170,6 +170,9 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="title_programfile">Tài khoản</string>
     <string name="GoPDUEconomy">GOPDU ECONOMY</string>
     <string name="pickup">PICK-UP</string>
+    <string name="pickupShowScreen">Đón tôi ở đây</string>
+    <string name="destinationShowScreen">Điểm đến</string>
+
 
     //step
     <string name="register_step1">REGISTER - STEP 1/6</string>
@@ -188,6 +191,7 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="price">%1$s VNĐ</string>
     <string name="distance">%1$.1f Km</string>
     <string name="percent">%1$.1f </string>
+    <string name="booking">Booking: %1$s</string>
 
 
     //param firebase
@@ -241,6 +245,8 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="Cancel">Cancel</string>
     <string name="param_StateCancel">cancel</string>
     <string name="reciverAllData">Đã tải hết dữ liệu</string>
+    <string name="title_activity_history_detail2">Map</string>
+    <string name="paramUserId">userId</string>
 
 
     //Pram inserHistory

@@ -1,4 +1,4 @@
-package gopdu.pdu.gopduversiondriver.custom_camera;
+package gopdu.pdu.gopduversiondriver.camera;
 
 import android.content.Context;
 import android.hardware.Camera;

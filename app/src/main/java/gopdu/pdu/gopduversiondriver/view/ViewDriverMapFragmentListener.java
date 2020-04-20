@@ -18,5 +18,5 @@ public interface ViewDriverMapFragmentListener {
 
     void insertError(String message);
 
-    void showRatting(TotalTrip totalTrip, double acceptPercent, double cancelPercent);
+    void showRating(TotalTrip totalTrip, double acceptPercent, double cancelPercent);
 }

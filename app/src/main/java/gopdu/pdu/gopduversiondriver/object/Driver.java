@@ -45,9 +45,9 @@ public class Driver implements Serializable {
     @SerializedName("imv_motorcyclepapers_backside")
     @Expose
     private String imvMotorcyclepapersBackside;
-    @SerializedName("idpay")
+    @SerializedName("pay")
     @Expose
-    private String idpay;
+    private String pay;
     @SerializedName("type_account")
     @Expose
     private String typeAccount;
@@ -99,7 +99,6 @@ public class Driver implements Serializable {
     public void setLicenseplates(String licenseplates) {
         this.licenseplates = licenseplates;
     }
-
 
     public String getImvDriverface() {
         return imvDriverface;
@@ -157,12 +156,12 @@ public class Driver implements Serializable {
         this.imvMotorcyclepapersBackside = imvMotorcyclepapersBackside;
     }
 
-    public String getIdpay() {
-        return idpay;
+    public String getPay() {
+        return pay;
     }
 
-    public void setIdpay(String idpay) {
-        this.idpay = idpay;
+    public void setPay(String pay) {
+        this.pay = pay;
     }
 
     public String getTypeAccount() {

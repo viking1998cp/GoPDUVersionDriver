@@ -40,7 +40,7 @@ public class PresenterDriverMapFragment implements DriverMapFragmentResponse{
     public void reciverInsertHistory(ServerResponse serverResponse) {
         driverMapFragmentModel.insertHistory(serverResponse);
     }
-    public void reciverRatting(TotalTripResponse totalTripResponse) {
+    public void reciverRating(TotalTripResponse totalTripResponse) {
         driverMapFragmentModel.getRatting(totalTripResponse);
     }
 
@@ -84,7 +84,7 @@ public class PresenterDriverMapFragment implements DriverMapFragmentResponse{
 
     @Override
     public void showRatting(TotalTrip totalTrip, double acceptPercent, double cancelPercent) {
-        callback.showRatting(totalTrip, acceptPercent, cancelPercent);
+        callback.showRating(totalTrip, acceptPercent, cancelPercent);
     }
 
 

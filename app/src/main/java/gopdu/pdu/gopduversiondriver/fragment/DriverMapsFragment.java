@@ -103,7 +103,7 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     private GetAccountInfomationViewModel accountInfomation;
     //Insert data to service
     private InsertHistoryViewModel insertHistoryModel;
-    //Get ratting
+    //Get rating
     private GetTotalTripViewModel totalTripModel;
 
     private DatabaseReference mdDataPushWorking;
@@ -128,19 +128,19 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
         init();
         setOnClick();
         getJob();
-        showRattingDriver();
+        showRatingDriver();
 
         return binding.getRoot();
     }
 
-    private void showRattingDriver() {
+    private void showRatingDriver() {
         Map param = new HashMap();
         param.put(getString(R.string.paramDriverId), userId);
         totalTripModel.getTotalTripResponseLiveData(param).observe(this, new Observer<TotalTripResponse>() {
             @Override
             public void onChanged(TotalTripResponse totalTripResponse) {
                 Log.d("BBB", "onChanged: " + totalTripResponse.getSuccess());
-                presenter.reciverRatting(totalTripResponse);
+                presenter.reciverRating(totalTripResponse);
             }
         });
 
@@ -767,19 +767,19 @@ public class DriverMapsFragment extends Fragment implements ViewDriverMapFragmen
     }
 
     @Override
-    public void showRatting(TotalTrip totalTrip, double acceptPercent, double cancelPercent) {
+    public void showRating(TotalTrip totalTrip, double acceptPercent, double cancelPercent) {
 
-        View bottomSheet = binding.contentDriverRatting.bottomSheetDes;
+        View bottomSheet = binding.contentDriverRating.bottomSheetDes;
         BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
         behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
         ;
 
-        Log.d("BBB", "showRatting: " + acceptPercent);
-        binding.contentDriverRatting.tvAccept.setText(getString(R.string.percent, acceptPercent));
+        Log.d("BBB", "showRating: " + acceptPercent);
+        binding.contentDriverRating.tvAccept.setText(getString(R.string.percent, acceptPercent));
 
-        binding.contentDriverRatting.tvCancel.setText(getString(R.string.percent, cancelPercent));
+        binding.contentDriverRating.tvCancel.setText(getString(R.string.percent, cancelPercent));
 
-        binding.contentDriverRatting.tvRatting.setText(getString(R.string.percent, totalTrip.getRatting()));
+        binding.contentDriverRating.tvRating.setText(getString(R.string.percent, totalTrip.getRating()));
 
     }
 

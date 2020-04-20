@@ -120,7 +120,7 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="tvDriverRatting">
+    <style name="tvDriverRating">
         <item name="android:layout_marginTop">@dimen/margin10dp</item>
         <item name="android:gravity">center</item>
         <item name="android:textColor">@color/colorGreen</item>
@@ -128,5 +128,10 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/fontMedium</item>
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="RatingBar" parent="Theme.AppCompat">
+        <item name="colorControlNormal">@color/colorGray</item>
+        <item name="colorControlActivated">@color/colorGreen</item>
     </style>
 </resources>

@@ -24,21 +24,18 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import gopdu.pdu.gopduversiondriver.Common;
 import gopdu.pdu.gopduversiondriver.GoPDUApplication;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.activity.RegisterActivity;
-import gopdu.pdu.gopduversiondriver.custom_camera.CameraPreview;
+import gopdu.pdu.gopduversiondriver.camera.CameraPreview;
 import gopdu.pdu.gopduversiondriver.databinding.FragmentCameraBinding;
 import gopdu.pdu.gopduversiondriver.object.ImageAlbum;
 

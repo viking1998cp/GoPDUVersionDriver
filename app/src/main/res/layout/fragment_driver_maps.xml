@@ -37,8 +37,8 @@
             android:theme="@style/SCBSwitch" />
 
 
-        <include layout="@layout/content_driver_ratting"
-            android:id="@+id/content_driverRatting"
+        <include layout="@layout/content_driver_rating"
+            android:id="@+id/content_driver_rating"
            />
 
         <include layout="@layout/content_infomation_travel"

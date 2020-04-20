@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
+import gopdu.pdu.gopduversiondriver.network.HistoryDetailRespon;
 import gopdu.pdu.gopduversiondriver.network.HistoryResponse;
 import gopdu.pdu.gopduversiondriver.network.ImageRespon;
 import gopdu.pdu.gopduversiondriver.network.TotalTripResponse;
@@ -54,6 +55,9 @@ public interface DataService {
 
     @GET("getHistory.php")
     Call<HistoryResponse> getHistory (@QueryMap Map<String,String> params);
+
+    @GET("getHistoryDetail.php")
+    Call<HistoryDetailRespon> getHistoryDetail (@QueryMap Map<String,String> params);
 
 
 

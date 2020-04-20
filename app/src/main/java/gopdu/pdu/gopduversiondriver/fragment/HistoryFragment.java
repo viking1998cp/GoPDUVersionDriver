@@ -1,6 +1,7 @@
 package gopdu.pdu.gopduversiondriver.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
@@ -16,7 +17,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +27,7 @@ import java.util.HashMap;
 import gopdu.pdu.gopduversiondriver.Common;
 import gopdu.pdu.gopduversiondriver.GoPDUApplication;
 import gopdu.pdu.gopduversiondriver.R;
+import gopdu.pdu.gopduversiondriver.activity.HistoryDetailActivityActivity;
 import gopdu.pdu.gopduversiondriver.adapter.ItemHistoryAdapter;
 import gopdu.pdu.gopduversiondriver.adapter.MainViewpager;
 import gopdu.pdu.gopduversiondriver.databinding.FragmentHistoryBinding;
@@ -96,7 +97,9 @@ public class HistoryFragment extends Fragment implements ViewHistoryFragmentList
         historyAdapter.setOnItemClickedListener(new ItemHistoryAdapter.OnItemClickedListener() {
             @Override
             public void onItemClick(int postion, View v) {
-                
+                Intent intent = new Intent(getActivity(), HistoryDetailActivityActivity.class);
+                intent.putExtra(getString(R.string.paramID), historyAdapter.getItem(postion).getId());
+                startActivity(intent);
             }
         });
     }

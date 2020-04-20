@@ -15,9 +15,9 @@ public class TotalTrip implements Serializable {
     @SerializedName("tripcancel")
     @Expose
     private double tripcancel;
-    @SerializedName("ratting")
+    @SerializedName("rating")
     @Expose
-    private double ratting;
+    private double rating;
 
     public int getTotal() {
         return total;
@@ -43,11 +43,11 @@ public class TotalTrip implements Serializable {
         this.tripcancel = tripcancel;
     }
 
-    public double getRatting() {
-        return ratting;
+    public double getRating() {
+        return rating;
     }
 
-    public void setRatting(double ratting) {
-        this.ratting = ratting;
+    public void setRating(double rating) {
+        this.rating = rating;
     }
 }

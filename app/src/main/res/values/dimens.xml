@@ -95,6 +95,9 @@
     <dimen name="separateHeight">3dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="imvArrow">50dp</dimen>
-    <dimen name="peekHeightMenuRatting">50dp</dimen>
+    <dimen name="peekHeightMenuRating">50dp</dimen>
+    <dimen name="lineWidth">2dp</dimen>
+    <dimen name="imvFace">80dp</dimen>
+    <dimen name="historyMap">220dp</dimen>
 
 </resources>

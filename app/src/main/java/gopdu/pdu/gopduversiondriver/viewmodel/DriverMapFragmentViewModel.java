@@ -62,7 +62,7 @@ public class DriverMapFragmentViewModel {
     public void getRatting(TotalTripResponse totalTripResponse) {
         if(totalTripResponse.getSuccess()){
             TotalTrip totalTrip = totalTripResponse.getData();
-            Log.d("BBB", "getRatting: "+totalTrip.getTripcancel());
+            Log.d("BBB", "getRating: "+totalTrip.getTripcancel());
             double acceptPercent = (totalTrip.getTripsuccess()/totalTrip.getTotal())*100;
             double cancelPercent = (totalTrip.getTripcancel()/totalTrip.getTotal())*100;
             callback.showRatting(totalTrip, acceptPercent, cancelPercent);

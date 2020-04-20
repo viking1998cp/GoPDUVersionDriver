@@ -37,9 +37,9 @@ public class History implements Serializable {
     @SerializedName("price")
     @Expose
     private int price;
-    @SerializedName("ratting")
+    @SerializedName("rating")
     @Expose
-    private int ratting;
+    private int rating;
     @SerializedName("time")
     @Expose
     private String time;
@@ -127,12 +127,12 @@ public class History implements Serializable {
         this.price = price;
     }
 
-    public int getRatting() {
-        return ratting;
+    public int getRating() {
+        return rating;
     }
 
-    public void setRatting(int ratting) {
-        this.ratting = ratting;
+    public void setRating(int rating) {
+        this.rating = rating;
     }
 
     public String getTime() {
