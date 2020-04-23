@@ -1,13 +1,16 @@
 package gopdu.pdu.gopduversiondriver.activity;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -24,7 +27,9 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 
+import gopdu.pdu.gopduversiondriver.BaseActivity;
 import gopdu.pdu.gopduversiondriver.Common;
+import gopdu.pdu.gopduversiondriver.GoPDUApplication;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.ActivityHistoryDetailBinding;
 import gopdu.pdu.gopduversiondriver.network.HistoryDetailRespon;
@@ -33,7 +38,7 @@ import gopdu.pdu.gopduversiondriver.presenter.PresenterHistoryDetailActivity;
 import gopdu.pdu.gopduversiondriver.view.ViewHistoryDetailActivityListener;
 import gopdu.pdu.gopduversiondriver.viewmodel.GetHistoryDetailViewModel;
 
-public class HistoryDetailActivityActivity extends FragmentActivity implements OnMapReadyCallback , ViewHistoryDetailActivityListener {
+public class HistoryDetailActivityActivity extends AppCompatActivity implements OnMapReadyCallback , ViewHistoryDetailActivityListener {
 
     private GoogleMap mMap;
     private GetHistoryDetailViewModel getHistoryDetailModel;
@@ -41,6 +46,8 @@ public class HistoryDetailActivityActivity extends FragmentActivity implements O
     private ProgressDialog progressDialog;
     private ActivityHistoryDetailBinding binding;
     private String userId;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +59,18 @@ public class HistoryDetailActivityActivity extends FragmentActivity implements O
         mapFragment.getMapAsync(this);
 
         init();
+        ActionToolbar();
         getData();
+        setUpOnClick();
+    }
+
+    private void setUpOnClick() {
+        binding.imvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void init() {
@@ -99,6 +117,17 @@ public class HistoryDetailActivityActivity extends FragmentActivity implements O
 
     }
 
+    private void ActionToolbar() {
+        setSupportActionBar(binding.toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
     //Zoom map
     private void zoomTarget(double lat, double lng) {
         try {
@@ -125,6 +154,7 @@ public class HistoryDetailActivityActivity extends FragmentActivity implements O
 
     private void setUpView(HistoryDetail data) {
         progressDialog.dismiss();
+        binding.tvTitle.setText(data.getHistory().getTime());
         Log.d("BBB", "setUpView: "+data.getHistory());
         binding.tvIdHistory.setText(getString(R.string.booking, data.getHistory().getId()));
         LatLng pickUpLng = new LatLng(data.getHistory().getPickupLat(), data.getHistory().getPickupLogt());
@@ -139,11 +169,6 @@ public class HistoryDetailActivityActivity extends FragmentActivity implements O
         binding.tvCustomerName.setText(data.getCustomer().getName());
         binding.tvCustomerPhone.setText(data.getCustomer().getNumberphone());
 
-        if(data.getHistory().getRating() >=0){
-            binding.ratting.setRating(data.getHistory().getRating());
-            binding.btnSubmit.setBackground(getResources().getDrawable(R.drawable.background_button_no_boder_gray));
-            binding.btnSubmit.setClickable(false);
-        }
 
     }
 

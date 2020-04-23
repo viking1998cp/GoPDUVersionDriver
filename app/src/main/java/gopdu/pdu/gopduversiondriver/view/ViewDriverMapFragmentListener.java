@@ -19,4 +19,10 @@ public interface ViewDriverMapFragmentListener {
     void insertError(String message);
 
     void showRating(TotalTrip totalTrip, double acceptPercent, double cancelPercent);
+
+    void resumTripPayment();
+
+    void resumTripDropOff();
+
+    void resumeTripPickUp();
 }

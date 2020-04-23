@@ -9,9 +9,9 @@ public interface ViewHistoryFragmentListener {
     void getHistorySuccess(ArrayList<History> data);
 
     void getHistoryFaild();
-    void getHistoryStateSuccess(String string);
+    void getHistoryStatusSuccess(String string);
 
-    void getHistoryStateCancel(String string);
+    void getHistoryStatusCancel(String string);
 
     void reciverAllDataHistory();
 }

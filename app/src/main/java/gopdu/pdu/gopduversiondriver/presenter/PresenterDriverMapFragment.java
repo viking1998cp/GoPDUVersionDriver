@@ -87,5 +87,23 @@ public class PresenterDriverMapFragment implements DriverMapFragmentResponse{
         callback.showRating(totalTrip, acceptPercent, cancelPercent);
     }
 
+    @Override
+    public void resumTripPayment() {
+        callback.resumTripPayment();
+    }
 
+    @Override
+    public void resumTripDropOff() {
+        callback.resumTripDropOff();
+    }
+
+    @Override
+    public void resumeTripPickUp() {
+        callback.resumeTripPickUp();
+    }
+
+
+    public void reciverResumStatusTrip(String status) {
+        driverMapFragmentModel.resumStatusTrip(status);
+    }
 }

@@ -30,7 +30,7 @@ public class HistoryFragmentViewModel {
 
     public void stateHistoryChange(int position) {
         if(position==0){
-            callback.getHistoryStateSuccess(GoPDUApplication.getInstance().getString(R.string.param_StateSuccess));
+            callback.getHistoryStateSuccess(GoPDUApplication.getInstance().getString(R.string.param_StatusSuccess));
         }else {
             callback.getHistoryStateCancel(GoPDUApplication.getInstance().getString(R.string.param_StateCancel));
         }

@@ -1,10 +1,8 @@
 package gopdu.pdu.gopduversiondriver.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -20,7 +18,6 @@ import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.ItemHistoryBinding;
 import gopdu.pdu.gopduversiondriver.databinding.ItemLoadingBinding;
 import gopdu.pdu.gopduversiondriver.object.History;
-import gopdu.pdu.gopduversiondriver.object.HistoryDetail;
 
 public class ItemHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>  {
 
@@ -110,7 +107,7 @@ public class ItemHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         LatLng DestinationLng = new LatLng(history.getDestinationLat(), history.getDestinationLogt());
         viewHolder.binding.tvDistance.setText(GoPDUApplication.getInstance().getString(R.string.distance, Common.getDistance(ơickupLng,DestinationLng)));
         viewHolder.binding.tvDestinationName.setText(history.getDestinationName());
-        if(history.getState().equals(GoPDUApplication.getInstance().getString(R.string.param_StateSuccess))){
+        if(history.getStatus().equals(GoPDUApplication.getInstance().getString(R.string.param_StatusSuccess))){
             viewHolder.binding.tvState.setBackground(GoPDUApplication.getInstance().getResources().getDrawable(R.drawable.background_button_no_boder_blue));
             viewHolder.binding.tvState.setText(GoPDUApplication.getInstance().getString(R.string.Successs));
         }else {

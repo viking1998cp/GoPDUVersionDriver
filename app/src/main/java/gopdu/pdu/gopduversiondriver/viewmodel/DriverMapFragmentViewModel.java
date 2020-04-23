@@ -68,4 +68,15 @@ public class DriverMapFragmentViewModel {
             callback.showRatting(totalTrip, acceptPercent, cancelPercent);
         }
     }
+
+    public void resumStatusTrip(String status) {
+        Log.d("AAA", "resumStatusTrip: "+status);
+        if(status.equals(GoPDUApplication.getInstance().getString(R.string.tripPickUp))){
+            callback.resumeTripPickUp();
+        }else if(status.equals(GoPDUApplication.getInstance().getString(R.string.tripDropOff))){
+            callback.resumTripDropOff();
+        }else if(status.equals(GoPDUApplication.getInstance().getString(R.string.tripPayment))) {
+            callback.resumTripPayment();
+        }
+    }
 }

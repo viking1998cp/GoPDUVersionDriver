@@ -22,4 +22,10 @@ public interface DriverMapFragmentResponse {
     void insertError(String message);
 
     void showRatting(TotalTrip totalTrip, double acceptPercent, double cancelPercent);
+
+    void resumTripPayment();
+
+    void resumTripDropOff();
+
+    void resumeTripPickUp();
 }

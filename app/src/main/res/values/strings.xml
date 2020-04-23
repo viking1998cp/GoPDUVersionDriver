@@ -223,7 +223,7 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="paramDestinationLogt_Insert">destination_logt</string>
     <string name="paramPrice_Insert">price</string>
     <string name="paramTime_Insert">time</string>
-    <string name="paramState_Insert">state</string>
+    <string name="paramStatus_Insert">status</string>
     <string name="promo">Tất cả các dịch vụ được cung cấp bởi GoPDU, tài xế vui lòng không lưu giữ lại các hình ảnh cá nhân của khách hàng, chúng tôi sẽ cố gắng nâng cấp và đảm bảo chất lượng dịch vụ phục vụ tài xế một cách tốt nhất !!</string>
     <string name="payment">Xác nhận đã thanh toán</string>
 
@@ -238,9 +238,9 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="title_activity_history_fragment">HistoryFragment</string>
     <string name="paramDriverId">driverid</string>
     <string name="paramPage">page</string>
-    <string name="paramState">state</string>
+    <string name="paramStatus">status</string>
     <string name="param_StateAll">all</string>
-    <string name="param_StateSuccess">success</string>
+    <string name="param_StatusSuccess">success</string>
     <string name="Successs">Success</string>
     <string name="Cancel">Cancel</string>
     <string name="param_StateCancel">cancel</string>

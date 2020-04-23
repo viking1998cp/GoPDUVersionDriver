@@ -49,7 +49,7 @@ public class HistoryFragment extends Fragment implements ViewHistoryFragmentList
     private PresenterHistoryFragment presenter;
     private ProgressDialog progressDialog;
 
-    private String  state;
+    private String status;
 
     private int page =1;
 
@@ -75,7 +75,7 @@ public class HistoryFragment extends Fragment implements ViewHistoryFragmentList
                 limitData =false;
                 stopHandler();
                 progressDialog.show();
-                presenter.reciverStateHistoryChange(tab.getPosition());
+                presenter.reciverStatusHistoryChange(tab.getPosition());
                 histories.clear();
                 page=1;
                 GetData(page);
@@ -109,7 +109,7 @@ public class HistoryFragment extends Fragment implements ViewHistoryFragmentList
         HashMap param = new HashMap<>();
         param.put(getString(R.string.paramID), userid);
         param.put(getString(R.string.paramPage), page);
-        param.put(getString(R.string.paramState), state);
+        param.put(getString(R.string.paramStatus), status);
 
         getHistoryModel.getHistoryResponseLiveData(param).observe(this, new Observer<HistoryResponse>() {
             @Override
@@ -121,7 +121,7 @@ public class HistoryFragment extends Fragment implements ViewHistoryFragmentList
 
 
     private void init() {
-        state = GoPDUApplication.getInstance().getString(R.string.param_StateSuccess);
+        status = GoPDUApplication.getInstance().getString(R.string.param_StatusSuccess);
         progressDialog = new ProgressDialog(getContext());
         progressDialog.setMessage(GoPDUApplication.getInstance().getString(R.string.waitingProcess));
         progressDialog.setCancelable(false);
@@ -221,13 +221,13 @@ public class HistoryFragment extends Fragment implements ViewHistoryFragmentList
     }
 
     @Override
-    public void getHistoryStateSuccess(String state) {
-        this.state = state;
+    public void getHistoryStatusSuccess(String status) {
+        this.status = status;
     }
 
     @Override
-    public void getHistoryStateCancel(String state) {
-        this.state = state;
+    public void getHistoryStatusCancel(String status) {
+        this.status = status;
     }
 
     @Override

@@ -21,7 +21,7 @@ public class PresenterHistoryFragment implements HistoryFragmentResponse {
         historyFragmentViewModel.getHistory(historyResponse);
     }
 
-    public void reciverStateHistoryChange(int position) {
+    public void reciverStatusHistoryChange(int position) {
         historyFragmentViewModel.stateHistoryChange(position);
     }
 
@@ -37,12 +37,12 @@ public class PresenterHistoryFragment implements HistoryFragmentResponse {
 
     @Override
     public void getHistoryStateSuccess(String string) {
-        callback.getHistoryStateSuccess(string);
+        callback.getHistoryStatusSuccess(string);
     }
 
     @Override
     public void getHistoryStateCancel(String string) {
-        callback.getHistoryStateCancel(string);
+        callback.getHistoryStatusCancel(string);
     }
 
     @Override
