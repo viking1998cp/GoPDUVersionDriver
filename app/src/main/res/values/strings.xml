@@ -247,6 +247,21 @@ d. căn chỉnh, kết hợp, sửa chữa, xóa và/hoặc phá hủy Dữ Li�
     <string name="reciverAllData">Đã tải hết dữ liệu</string>
     <string name="title_activity_history_detail2">Map</string>
     <string name="paramUserId">userId</string>
+    <string name="no_gpsConnect">Đang xách định vị trí vui lòng chờ trong giây lát</string>
+    <string name="setting">Cài đặt</string>
+    <string name="informationUser">Thông tin người dùng</string>
+    <string name="news">Tin tức</string>
+    <string name="userAccount">Tài khoản</string>
+    <string name="tablePrice">Bảng giá</string>
+    <string name="partner">Đối tác</string>
+    <string name="helper">Trợ giúp</string>
+    <string name="shareToFriend">Chia sẻ tới bạn bè</string>
+    <string name="joinGoPDU">Tham gia với chúng tôi</string>
+    <string name="logOut">Đăng xuất</string>
+    <string name="name">Tên</string>
+    <string name="email">Địa chỉ email</string>
+    <string name="edit">Sửa</string>
+    <string name="tripWaitting">waitting</string>
 
 
     //Pram inserHistory

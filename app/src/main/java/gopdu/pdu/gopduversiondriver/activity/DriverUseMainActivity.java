@@ -12,11 +12,13 @@ import android.view.MenuItem;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import gopdu.pdu.gopduversiondriver.BaseActivity;
+import gopdu.pdu.gopduversiondriver.Database.DataDriver;
 import gopdu.pdu.gopduversiondriver.IOnBackPressed;
 import gopdu.pdu.gopduversiondriver.R;
 import gopdu.pdu.gopduversiondriver.databinding.ActivityDriverUseMainBinding;
 import gopdu.pdu.gopduversiondriver.fragment.DriverMapsFragment;
 import gopdu.pdu.gopduversiondriver.fragment.HistoryFragment;
+import gopdu.pdu.gopduversiondriver.fragment.SettingFragment;
 
 public class DriverUseMainActivity extends BaseActivity {
 
@@ -24,6 +26,9 @@ public class DriverUseMainActivity extends BaseActivity {
     private int back;
     private DriverMapsFragment driverMapsFragment;
     private HistoryFragment historyFragment;
+    private SettingFragment settingFragment;
+
+    private DataDriver dataDriver;
 
     @Override
     public int getLayoutId() {
@@ -38,8 +43,10 @@ public class DriverUseMainActivity extends BaseActivity {
         setUpMenuOnClick();
     }
     private void init() {
+        dataDriver = DataDriver.getInMemoryDatabase(getApplicationContext());
         driverMapsFragment = new DriverMapsFragment();
         historyFragment = new HistoryFragment();
+        settingFragment = new SettingFragment();
         loadFragment(driverMapsFragment, R.id.navigation_work);
     }
 
@@ -61,10 +68,9 @@ public class DriverUseMainActivity extends BaseActivity {
                         }
 
                         return true;
-                    case R.id.navigation_profile:
+                    case R.id.navigation_setting:
                         if(back != 3){
-//                            fragment = new AboutFragment();
-//                            loadFragment(fragment);
+                            loadFragment(settingFragment, R.id.navigation_history);
                             back =3;
                         }
                         return true;

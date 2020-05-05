@@ -2,6 +2,8 @@ package gopdu.pdu.gopduversiondriver.modelresponse;
 
 import android.location.Address;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import gopdu.pdu.gopduversiondriver.object.Driver;
 import gopdu.pdu.gopduversiondriver.object.TotalTrip;
 
@@ -28,4 +30,6 @@ public interface DriverMapFragmentResponse {
     void resumTripDropOff();
 
     void resumeTripPickUp();
+
+    void resumTripWaitting();
 }

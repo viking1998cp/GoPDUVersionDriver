@@ -9,6 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import gopdu.pdu.gopduversiondriver.Common;
 import gopdu.pdu.gopduversiondriver.GoPDUApplication;
 import gopdu.pdu.gopduversiondriver.R;
+import gopdu.pdu.gopduversiondriver.SharedPrefs;
 import gopdu.pdu.gopduversiondriver.modelresponse.DriverMapFragmentResponse;
 import gopdu.pdu.gopduversiondriver.network.AccountResponse;
 import gopdu.pdu.gopduversiondriver.network.TotalTripResponse;
@@ -77,6 +78,10 @@ public class DriverMapFragmentViewModel {
             callback.resumTripDropOff();
         }else if(status.equals(GoPDUApplication.getInstance().getString(R.string.tripPayment))) {
             callback.resumTripPayment();
+        }else if(status.equals(GoPDUApplication.getInstance().getString(R.string.tripWaitting))){
+            callback.resumTripWaitting();
         }
     }
+
+
 }

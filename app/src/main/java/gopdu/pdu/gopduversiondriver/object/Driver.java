@@ -1,13 +1,21 @@
 package gopdu.pdu.gopduversiondriver.object;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+@Entity(tableName = "Driver")
 public class Driver implements Serializable {
+
     @SerializedName("id")
     @Expose
+    @PrimaryKey
+    @NonNull
     private String id;
     @SerializedName("name")
     @Expose

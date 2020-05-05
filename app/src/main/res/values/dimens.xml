@@ -97,7 +97,11 @@
     <dimen name="imvArrow">50dp</dimen>
     <dimen name="peekHeightMenuRating">50dp</dimen>
     <dimen name="lineWidth">2dp</dimen>
-    <dimen name="imvFace">80dp</dimen>
+    <dimen name="imvFaceSmall">80dp</dimen>
+    <dimen name="imvFaceMedium">90dp</dimen>
+    <dimen name="imvFaceBig">100dp</dimen>
     <dimen name="historyMap">220dp</dimen>
+    <dimen name="margin6dp">6dp</dimen>
+    <dimen name="imv_banner_shipper">200dp</dimen>
 
 </resources>

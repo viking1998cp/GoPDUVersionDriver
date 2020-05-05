@@ -3,5 +3,6 @@
     <integer name="orientation_camera">90</integer>
     <integer name="maxLenghtPhoneNumber">10</integer>
     <integer name="requestLocation">3000</integer>
+    <integer name="angleFillColor">90</integer>
 
 </resources>

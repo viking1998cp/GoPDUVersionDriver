@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+
+        <LinearLayout
+            android:background="@drawable/background_blue_green"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/backgroundTitleHeight">
+
+            <androidx.appcompat.widget.Toolbar
+                android:paddingRight="@dimen/padding10dp"
+                android:id="@+id/toolbar"
+                style="@style/ToolBarTheme.ToolBarStyle"
+                android:background="@android:color/transparent"
+                android:theme="@style/ToolBarTheme.ToolBarStyle"
+                app:title="@string/setting"
+                />
+        </LinearLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin8dp"
+                    android:layout_marginTop="@dimen/margin60dp"
+                    android:layout_marginRight="@dimen/margin8dp"
+                    android:background="@drawable/background_round_white"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/padding10dp"
+                    android:paddingBottom="@dimen/padding10dp"
+                    >
+                    <LinearLayout
+                        android:layout_margin="@dimen/margin6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:id="@+id/lnInfomation"
+                            android:paddingLeft="@dimen/padding20dp"
+                            android:paddingRight="@dimen/padding20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_marginRight="@dimen/margin16dp"
+                                android:layout_width="@dimen/imvIconMedium"
+                                android:layout_height="@dimen/imvIconMedium"
+                                android:src="@drawable/ic_infomation" />
+                            <TextView
+                                style="@style/TextFunction"
+                                android:text="@string/informationUser"/>
+                        </LinearLayout>
+                        <View
+                            style="@style/viewLineFunction" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_margin="@dimen/margin6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding20dp"
+                            android:paddingRight="@dimen/padding20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_marginRight="@dimen/margin16dp"
+                                android:layout_width="@dimen/imvIconMedium"
+                                android:layout_height="@dimen/imvIconMedium"
+                                android:src="@drawable/ic_news" />
+
+                            <TextView
+                                style="@style/TextFunction"
+                                android:text="@string/news"/>
+                        </LinearLayout>
+                        <View
+                            style="@style/viewLineFunction" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_margin="@dimen/margin6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding20dp"
+                            android:paddingRight="@dimen/padding20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_marginRight="@dimen/margin16dp"
+                                android:layout_width="@dimen/imvIconMedium"
+                                android:layout_height="@dimen/imvIconMedium"
+                                android:src="@drawable/ic_account" />
+                            <TextView
+                                style="@style/TextFunction"
+                                android:text="@string/userAccount"/>
+
+                        </LinearLayout>
+                        <View
+                            style="@style/viewLineFunction" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_margin="@dimen/margin6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding20dp"
+                            android:paddingRight="@dimen/padding20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_marginRight="@dimen/margin16dp"
+                                android:layout_width="@dimen/imvIconMedium"
+                                android:layout_height="@dimen/imvIconMedium"
+                                android:src="@drawable/ic_price" />
+                            <TextView
+                                style="@style/TextFunction"
+                                android:text="@string/tablePrice"/>
+
+                        </LinearLayout>
+                        <View
+                            style="@style/viewLineFunction" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_margin="@dimen/margin6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding20dp"
+                            android:paddingRight="@dimen/padding20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_marginRight="@dimen/margin16dp"
+                                android:layout_width="@dimen/imvIconMedium"
+                                android:layout_height="@dimen/imvIconMedium"
+                                android:src="@drawable/ic_partner" />
+                            <TextView
+                                style="@style/TextFunction"
+                                android:text="@string/partner"/>
+
+                        </LinearLayout>
+                        <View
+                            style="@style/viewLineFunction" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_margin="@dimen/margin6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding20dp"
+                            android:paddingRight="@dimen/padding20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_marginRight="@dimen/margin16dp"
+                                android:layout_width="@dimen/imvIconMedium"
+                                android:layout_height="@dimen/imvIconMedium"
+                                android:src="@drawable/ic_helper" />
+                            <TextView
+                                style="@style/TextFunction"
+                                android:text="@string/helper"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin8dp"
+                    android:layout_marginTop="@dimen/margin16dp"
+                    android:layout_marginRight="@dimen/margin8dp"
+                    android:background="@drawable/background_round_white"
+                    android:orientation="vertical"
+                    android:paddingTop="@dimen/padding10dp"
+                    android:paddingBottom="@dimen/padding10dp"
+                    >
+                    <LinearLayout
+                        android:layout_margin="@dimen/margin6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding20dp"
+                            android:paddingRight="@dimen/padding20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_marginRight="@dimen/margin16dp"
+                                android:layout_width="@dimen/imvIconMedium"
+                                android:layout_height="@dimen/imvIconMedium"
+                                android:src="@drawable/ic_share" />
+                            <TextView
+                                style="@style/TextFunction"
+                                android:text="@string/shareToFriend"/>
+                        </LinearLayout>
+                        <View
+                            style="@style/viewLineFunction" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_margin="@dimen/margin6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding20dp"
+                            android:paddingRight="@dimen/padding20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_marginRight="@dimen/margin16dp"
+                                android:layout_width="@dimen/imvIconMedium"
+                                android:layout_height="@dimen/imvIconMedium"
+                                android:src="@drawable/ic_logo" />
+                            <TextView
+                                style="@style/TextFunction"
+                                android:text="@string/joinGoPDU"/>
+
+                        </LinearLayout>
+                        <View
+                            style="@style/viewLineFunction" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_margin="@dimen/margin6dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding20dp"
+                            android:paddingRight="@dimen/padding20dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:layout_marginRight="@dimen/margin16dp"
+                                android:layout_width="@dimen/imvIconMedium"
+                                android:layout_height="@dimen/imvIconMedium"
+                                android:src="@drawable/ic_logout" />
+                            <TextView
+                                android:id="@+id/btnLogout"
+                                style="@style/TextFunction"
+                                android:text="@string/logOut"/>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </FrameLayout>
+</layout>

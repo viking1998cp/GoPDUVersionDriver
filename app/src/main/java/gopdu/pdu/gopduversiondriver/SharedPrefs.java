@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 
 
 public class SharedPrefs {
+    public static final String lastLocationLat= "lastLocation_lat";
+    public static final String lastLocationLogt= "lastLocation_logt";
+
     private static final String PREFS_NAME = "share_prefs";
     private static SharedPrefs mInstance;
     private SharedPreferences mSharedPreferences;

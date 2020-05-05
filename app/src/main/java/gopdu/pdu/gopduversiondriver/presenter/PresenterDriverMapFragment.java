@@ -102,8 +102,15 @@ public class PresenterDriverMapFragment implements DriverMapFragmentResponse{
         callback.resumeTripPickUp();
     }
 
+    @Override
+    public void resumTripWaitting() {
+        callback.resumTripWaitting();
+    }
+
 
     public void reciverResumStatusTrip(String status) {
         driverMapFragmentModel.resumStatusTrip(status);
     }
+
+
 }

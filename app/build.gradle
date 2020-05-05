@@ -99,6 +99,10 @@ dependencies {
 
     //direction
 
+    //database lib
+    implementation 'android.arch.persistence.room:runtime:2,1,0';
+    annotationProcessor "android.arch.persistence.room:compiler:2.1.0"
+
 
 }
 

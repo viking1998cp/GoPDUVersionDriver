@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".MainActivity"
+        >
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <include layout="@layout/content_banner_infomation"
+                />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_width="match_parent"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_gravity="left"
+                        android:id="@+id/imvBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_navigate_before_black_24dp"/>
+
+                </LinearLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:weightSum="20">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="5"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:padding="@dimen/padding10dp"
+                        android:id="@+id/imvDriverFace"
+                        android:layout_width="@dimen/imvFaceMedium"
+                        android:layout_height="@dimen/imvFaceMedium"
+                        android:layout_gravity="bottom|center_horizontal"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="15"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding10dp">
+                    <LinearLayout
+                        android:padding="@dimen/padding10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/fontMediumSmall"
+                        android:text="@string/name"/>
+                        <EditText
+                            android:id="@+id/et_name"
+                            style="@style/editInfomation"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/fontMediumSmall"
+                            android:text="@string/phoneHint"/>
+                        <LinearLayout
+                            android:paddingLeft="@dimen/padding5dp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="10"
+                            >
+
+                            <ImageView
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/imvIconBig"
+                                android:layout_weight="1"
+                                android:src="@drawable/logo_viettnam" />
+
+
+                            <EditText
+                                android:paddingLeft="@dimen/padding10dp"
+                                android:id="@+id/etPhone"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="9"
+                                android:hint="@string/phoneHint"
+                                android:inputType="number"
+                                android:maxLength="@integer/maxLenghtPhoneNumber"
+                                />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/fontMediumSmall"
+                            android:text="@string/licenseplatesHint"/>
+                        <EditText
+                            android:id="@+id/et_licence_plate"
+                            style="@style/editInfomation"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:gravity="bottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginBottom="@dimen/margin24dp"
+                        android:orientation="vertical"
+                        android:weightSum="20"
+                        >
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/imv_banner_shipper"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_banner_shipper" />
+
+                        <Button
+                            android:text="@string/logOut"
+                            style="@style/button.Login"/>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>
+

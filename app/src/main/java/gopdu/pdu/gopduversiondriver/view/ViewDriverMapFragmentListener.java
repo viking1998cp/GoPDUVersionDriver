@@ -2,6 +2,8 @@ package gopdu.pdu.gopduversiondriver.view;
 
 import android.location.Address;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import gopdu.pdu.gopduversiondriver.object.Driver;
 import gopdu.pdu.gopduversiondriver.object.TotalTrip;
 
@@ -25,4 +27,6 @@ public interface ViewDriverMapFragmentListener {
     void resumTripDropOff();
 
     void resumeTripPickUp();
+
+    void resumTripWaitting();
 }
